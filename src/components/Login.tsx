@@ -1,10 +1,11 @@
 import { Input } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 
 import { IconLogo } from "@assets/index";
 import { Button } from "@components/index";
+import { useMutationLogin, useMutationRegister } from "@queries/index";
 
 interface ILoginProps {
   setIsAuth: (value: boolean) => void;
@@ -12,15 +13,25 @@ interface ILoginProps {
 
 export const Login = ({ setIsAuth }: ILoginProps) => {
   const [createAcc, setCreateAcc] = useState(false);
-  // const { mutate, isLoading, isError } = useMutationLogin();
+  const {
+    mutate: login,
+    isLoading: loadingLogin,
+    isSuccess: loginSuccess,
+  } = useMutationLogin();
+  const {
+    mutate: register,
+    isLoading: loadingRegister,
+    isSuccess: registerSuccess,
+  } = useMutationRegister();
 
   const onSubmitHandler = async (values: {
     username: string;
     password: string;
   }) => {
     console.log("Logged", values);
-    // if (createAcc)
-    // mutate({ password: values.password, username: values.username });
+    if (createAcc)
+      register({ password: values.password, username: values.username });
+    else login({ password: values.password, username: values.username });
   };
 
   const { errors, touched, getFieldProps, handleSubmit } = useFormik({
@@ -34,6 +45,13 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
       password: string().required("Mot de passe requis"),
     }),
   });
+
+  useEffect(() => {
+    if (loginSuccess) setIsAuth(true);
+  }, [loginSuccess]);
+  useEffect(() => {
+    if (registerSuccess) setCreateAcc(false);
+  }, [registerSuccess]);
 
   return (
     <>
@@ -78,7 +96,7 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
             primary
             type="submit"
             disabled={!!errors.username || !!errors.password}
-            // loading={isLoading}
+            loading={loadingLogin || loadingRegister}
             className="my-5 w-full"
           >
             {createAcc ? "Créer mon compte" : "Se connecter"}

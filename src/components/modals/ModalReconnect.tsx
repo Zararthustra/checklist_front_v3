@@ -1,20 +1,25 @@
 import { Modal } from "antd";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { IconInfo, IconLogin, IconOnOff } from "@assets/index";
 import { Button } from "@components/index";
-import { getLS } from "@services/localStorageService";
 import { useMutationReconnect } from "@queries/index";
+import { IconInfo, IconLogin, IconOnOff } from "@assets/index";
+import { clearLS, getLS } from "@services/localStorageService";
 
 interface IModalReconnectProps {
   showReconnectModal: boolean;
-  logout: () => void;
 }
 
 export const ModalReconnect = ({
   showReconnectModal,
-  logout,
 }: IModalReconnectProps) => {
-  const { mutate, isLoading } = useMutationReconnect();
+  const navigate = useNavigate();
+  const { mutate, isLoading, isSuccess } = useMutationReconnect();
+
+  useEffect(() => {
+    if (isSuccess) navigate(0);
+  }, [isSuccess]);
 
   return (
     <Modal
@@ -33,7 +38,14 @@ export const ModalReconnect = ({
             <IconLogin width={22} height={22} />
             <p>Se reconnecter</p>
           </Button>
-          <Button variant="ko" className="w-full" onClick={logout}>
+          <Button
+            variant="ko"
+            className="w-full"
+            onClick={() => {
+              clearLS();
+              navigate(0);
+            }}
+          >
             <IconOnOff />
             <p>Se déconnecter</p>
           </Button>
@@ -46,7 +58,7 @@ export const ModalReconnect = ({
         <p className="my-5 text-center text-base">Que désirez-vous faire ?</p>
 
         <div className="bubble bubble--info mb-5">
-          <IconInfo className="shrink-0 text-blue-500" />
+          <IconInfo className="shrink-0 " />
           <p className="text-xs">
             Pas de panique ! Pour des raisons de sécurité, votre session expire
             après un certain temps.

@@ -1,16 +1,10 @@
 import { expect, test, describe, assertType } from "vitest";
 
-import { IUser, ILoginResponse } from "@interfaces/index";
-import { login, reconnect, register, getUser } from "@queries/index";
-import { userMock, loginRequestMock, loginResponseMock } from "@mocks/index";
+import { ILoginResponse } from "@interfaces/index";
+import { login, reconnect, register } from "@queries/index";
+import { loginRequestMock, loginResponseMock } from "@mocks/index";
 
 describe("Queries => User", () => {
-  test("GET \t User", async () => {
-    const user = await getUser(1);
-    expect(user).toStrictEqual(userMock);
-    assertType<IUser>(user);
-  });
-
   test("POST \t Register", async () => {
     const registerResponse = await register(loginRequestMock);
     expect(registerResponse).toStrictEqual({

@@ -1,8 +1,7 @@
 import { App } from "antd";
 import { AxiosError } from "axios";
-import { JwtPayload, jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { jwtDecode } from "jwt-decode";
+import { useMutation } from "@tanstack/react-query";
 
 import {
   setAccessToken,
@@ -11,17 +10,12 @@ import {
 } from "@services/localStorageService";
 import axiosInstance from "./axios";
 import { toastObject, messageObject } from "@utils/formatters";
-import { ILoginRequest, ILoginResponse, IUser } from "@interfaces/index";
+import { ILoginRequest, ILoginResponse } from "@interfaces/index";
 
 // =====
 // Axios
 // =====
 
-// RETRIEVE
-export const getUser = async (userId: number): Promise<IUser> => {
-  const { data } = await axiosInstance.get(`/users/${userId}`);
-  return data;
-};
 // LOGIN
 export const login = async (payload: ILoginRequest) => {
   const { data } = await axiosInstance.post<ILoginResponse>(`/token/`, payload);
@@ -44,33 +38,8 @@ export const register = async (payload: ILoginRequest) => {
 // ReactQuery
 // ==========
 
-// RETRIEVE
-export const useQueryUser = (userId: number) => {
-  const { notification, message } = App.useApp();
-
-  return useQuery(["user", userId], () => getUser(userId), {
-    // Stale 5min
-    staleTime: 60_000 * 5,
-    onError: (error: AxiosError) => {
-      if (error.response?.status === 404)
-        message.error(messageObject("error", "Cet utilisateur n'existe pas."));
-      else
-        notification.error(
-          toastObject(
-            "error",
-            "Impossible de récupérer les données",
-            `Une erreur est survenue. Code : ${
-              error.response ? error.response.status : error.message
-            }`,
-          ),
-        );
-    },
-  });
-};
-
 // LOGIN
 export const useMutationLogin = () => {
-  const navigate = useNavigate();
   const { notification } = App.useApp();
 
   return useMutation(login, {
@@ -79,17 +48,16 @@ export const useMutationLogin = () => {
       setRefreshToken(response.refresh);
       try {
         const token = jwtDecode<any>(response.access);
-        setLS("name", token.name);
+        setLS("name", token.username);
         setLS("userId", token.user_id);
 
         notification.success(
           toastObject(
             "success",
             "Connexion réussie",
-            `Bienvenue ${token.name} !`,
+            `Bonjour ${token.username} !`,
           ),
         );
-        navigate(`/`);
       } catch (error) {
         console.log("JWT Error:", error);
         notification.error(
@@ -124,7 +92,6 @@ export const useMutationLogin = () => {
 
 // RECONNECT
 export const useMutationReconnect = () => {
-  const navigate = useNavigate();
   const { notification } = App.useApp();
 
   return useMutation(reconnect, {
@@ -133,16 +100,15 @@ export const useMutationReconnect = () => {
       setRefreshToken(response.refresh);
       try {
         const token = jwtDecode<any>(response.access);
-        setLS("name", token.name);
+        setLS("name", token.username);
         setLS("userId", token.user_id);
         notification.success(
           toastObject(
             "success",
             "Reconnexion réussie",
-            `Heureux de vous revoir ${token.name} !`,
+            `Heureux de vous revoir ${token.username} !`,
           ),
         );
-        navigate(`/`);
       } catch (error) {
         console.log("JWT Error:", error);
         notification.error(
@@ -167,7 +133,6 @@ export const useMutationReconnect = () => {
 
 // REGISTER
 export const useMutationRegister = () => {
-  const navigate = useNavigate();
   const { message } = App.useApp();
 
   return useMutation(register, {
@@ -184,11 +149,10 @@ export const useMutationRegister = () => {
       message.success(
         messageObject(
           "success",
-          "Compte créé, vous pouvez vous connecter.",
+          "Compte créé, vous pouvez vous connecter !",
           "useMutationRegister",
         ),
       );
-      navigate("/login");
     },
     onError: (error: AxiosError) => {
       if (error.response?.status === 400)

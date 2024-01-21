@@ -1,22 +1,17 @@
 import { useState } from "react";
 
+import { Login, Navbar } from "@components/index";
 import { getLS } from "@services/localStorageService";
-import { Login, ModalReconnect, Navbar } from "@components/index";
 
 export const Home = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [isAuth, setIsAuth] = useState(!!getLS("access"));
+  const [isAuth, setIsAuth] = useState(!!getLS("accessToken"));
 
   if (!isAuth) return <Login setIsAuth={setIsAuth} />;
 
   return (
     <>
-      <ModalReconnect
-        logout={() => setShowModal(false)}
-        showReconnectModal={showModal}
-      />
       <Navbar />
-      <main className="mt-10 flex flex-col items-center px-2">
+      <main className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100">
         <h1>Checklist</h1>
       </main>
     </>

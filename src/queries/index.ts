@@ -12,11 +12,9 @@ export {
 } from "./template.query";
 
 export {
-  getUser,
   login,
   reconnect,
   register,
-  useQueryUser,
   useMutationLogin,
   useMutationReconnect,
   useMutationRegister,

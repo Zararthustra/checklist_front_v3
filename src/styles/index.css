@@ -118,7 +118,7 @@
     @apply flex items-center gap-4 rounded px-2 py-2;
   }
   .bubble--info {
-    @apply border-[1px] border-solid border-blue-200 bg-blue-50 text-zinc-900;
+    @apply border-[1px] border-solid border-blue-800 bg-blue-50 text-blue-800 dark:border-blue-50 dark:bg-blue-400 dark:text-blue-50;
   }
 }
 

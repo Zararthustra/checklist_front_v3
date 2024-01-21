@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from "axios";
 
 import { getLS } from "@services/localStorageService";
 
-const devURL = "http://localhost:8000/api/v1";
-const prodURL = "https://prod/api/v1";
+const devURL = "http://192.168.1.44:8000/api/";
+const prodURL = "https://prod/api/";
 
 export const baseURL = import.meta.env.MODE === "production" ? prodURL : devURL;
 
