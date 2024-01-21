@@ -1,0 +1,33 @@
+name: Test, Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Test, Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install 🏗️
+        run: npm install
+
+      - name: Test 🧪
+        run: npm run test
+
+      - name: Build 🛠️
+        run: npm run build
+
+      # - name: Deploy 🚀
+      #   uses: SamKirkland/FTP-Deploy-Action@4.2.0
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     local-dir: dist/
+      #     server-dir: /public_html/
