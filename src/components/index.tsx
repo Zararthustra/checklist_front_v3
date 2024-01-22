@@ -1,4 +1,4 @@
-export { ComponentTemplate } from "./ComponentTemplate";
+export { Category } from "./Category";
 
 // Modals
 export { ModalReconnect } from "./modals/ModalReconnect";

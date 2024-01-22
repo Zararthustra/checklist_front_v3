@@ -24,3 +24,7 @@ export { IconTrash } from "./svg/IconTrash";
 export { IconDark } from "./svg/IconDark";
 export { IconLight } from "./svg/IconLight";
 export { IconLogo } from "./svg/IconLogo";
+export { IconHidden } from "./svg/IconHidden";
+export { IconVisible } from "./svg/IconVisible";
+export { IconPalette } from "./svg/IconPalette";
+export { IconAddTask } from "./svg/IconAddTask";

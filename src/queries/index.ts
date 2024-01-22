@@ -19,3 +19,8 @@ export {
   useMutationReconnect,
   useMutationRegister,
 } from "./user.query";
+
+export {
+  useQueryRetrieveCategories,
+  useQueryRetrieveTasks,
+} from "./checklist.query";

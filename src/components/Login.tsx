@@ -28,7 +28,6 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
     username: string;
     password: string;
   }) => {
-    console.log("Logged", values);
     if (createAcc)
       register({ password: values.password, username: values.username });
     else login({ password: values.password, username: values.username });
