@@ -3,7 +3,7 @@ import axios, { AxiosInstance } from "axios";
 import { getLS } from "@services/localStorageService";
 
 const devURL = "http://192.168.1.44:8000/api/";
-const prodURL = "https://prod/api/";
+const prodURL = "https://checklist.pythonanywhere.com/api/";
 
 export const baseURL = import.meta.env.MODE === "production" ? prodURL : devURL;
 
