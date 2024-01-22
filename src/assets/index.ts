@@ -28,3 +28,4 @@ export { IconHidden } from "./svg/IconHidden";
 export { IconVisible } from "./svg/IconVisible";
 export { IconPalette } from "./svg/IconPalette";
 export { IconAddTask } from "./svg/IconAddTask";
+export { IconSMS } from "./svg/IconSMS";

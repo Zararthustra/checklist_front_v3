@@ -4,7 +4,9 @@ import { Input, Popover, App, ConfigProvider } from "antd";
 import {
   IconAddTask,
   IconHidden,
+  IconInfo,
   IconPalette,
+  IconSMS,
   IconTrash,
   IconVisible,
 } from "@assets/index";
@@ -60,7 +62,7 @@ export const Category = ({
   useEffect(() => {
     if (isSuccess) setInputValue("");
   }, [isSuccess]);
-
+  console.log(tasks.map((task) => task.name).join(", "));
   return (
     <>
       <ModalConfirmDelete
@@ -90,6 +92,17 @@ export const Category = ({
             >
               <IconPalette className="cursor-pointer" />
             </Popover>
+            <a
+              href={
+                "sms:?&body=Voici ma liste " +
+                name +
+                " :%0a- " +
+                tasks.map((task) => task.name).join("%0a- ")
+              }
+              className="cursor-pointer hover:text-zinc-100 dark:hover:text-zinc-900"
+            >
+              <IconSMS />
+            </a>
             {hidden ? (
               <IconHidden
                 onClick={() =>
