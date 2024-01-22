@@ -29,7 +29,7 @@ const App = () => {
       theme={{
         token: {
           colorPrimary: "#82bd69",
-          borderRadius: 3,
+          borderRadius: 0,
         },
       }}
     >

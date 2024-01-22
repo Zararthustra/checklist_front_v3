@@ -23,4 +23,6 @@ export {
 export {
   useQueryRetrieveCategories,
   useQueryRetrieveTasks,
+  useMutationCreateTask,
+  useMutationDeleteTask,
 } from "./checklist.query";

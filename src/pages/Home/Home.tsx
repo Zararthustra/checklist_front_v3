@@ -33,7 +33,9 @@ export const Home = () => {
             categories.map((category, index) => (
               <Category
                 key={index}
+                id={category.id}
                 color={category.color}
+                hidden={category.isHidden}
                 name={category.name}
                 tasks={tasks.filter((task) => task.category === category.id)}
               />

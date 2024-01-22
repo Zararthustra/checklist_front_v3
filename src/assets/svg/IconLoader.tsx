@@ -20,7 +20,7 @@ export const IconLoader = ({
   >
     <path
       fill="none"
-      stroke="currentColor"
+      stroke={color ? color : "currentColor"}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"

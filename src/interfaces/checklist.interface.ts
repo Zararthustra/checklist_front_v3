@@ -4,7 +4,7 @@ interface ICategory {
   id: string;
   name: string;
   color: string;
-  isHidden: string;
+  isHidden: boolean;
   owner: number;
 }
 

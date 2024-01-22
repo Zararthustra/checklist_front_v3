@@ -1,4 +1,5 @@
 export { Category } from "./Category";
+export { Task } from "./Task";
 
 // Modals
 export { ModalReconnect } from "./modals/ModalReconnect";

@@ -11,8 +11,20 @@ import { toastObject, messageObject } from "@utils/formatters";
 // =====
 
 // CREATE
-export const create = async (payload: any) => {
-  const { data } = await axiosInstance.post("/endpoint", payload);
+export const createTask = async ({
+  name,
+  categoryId,
+}: {
+  name: string;
+  categoryId: string;
+}) => {
+  const { data } = await axiosInstance.post(
+    "/tasks",
+    { name },
+    {
+      params: { categoryId },
+    },
+  );
   return data;
 };
 
@@ -39,12 +51,8 @@ export const update = async ({ payload, id }: { payload: any; id: number }) => {
 };
 
 // DELETE
-export const remove = async (id: number): Promise<any> => {
-  await axiosInstance.delete(`/endpoint/${id}`, {
-    params: {
-      id_param: id,
-    },
-  });
+export const removeTask = async (id: string): Promise<any> => {
+  await axiosInstance.delete(`/tasks/${id}`);
 };
 
 // ==========
@@ -52,24 +60,34 @@ export const remove = async (id: number): Promise<any> => {
 // ==========
 
 // CREATE
-export const useMutationCreate = () => {
+export const useMutationCreateTask = () => {
   const queryClient = useQueryClient();
   const { message, notification } = App.useApp();
 
-  return useMutation(create, {
+  return useMutation(createTask, {
     onMutate: () => {
       message.open(
-        messageObject("loading", "Création...", "useMutationCreate"),
+        messageObject("loading", "Ajout...", "useMutationCreateTask"),
       );
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries(["someQuery"]);
+      queryClient.invalidateQueries(["tasks"]);
 
-      message.success(messageObject("success", "Créé", "useMutationCreate"));
+      message.success(
+        messageObject(
+          "success",
+          response.name + " ajouté",
+          "useMutationCreateTask",
+        ),
+      );
     },
     onError: (error) => {
       message.error(
-        messageObject("error", "Une erreur est survenue", "useMutationCreate"),
+        messageObject(
+          "error",
+          "Une erreur est survenue",
+          "useMutationCreateTask",
+        ),
       );
       notification.error(
         toastObject(
@@ -171,37 +189,39 @@ export const useMutationUpdate = () => {
 };
 
 // DELETE
-export const useMutationDelete = () => {
+export const useMutationDeleteTask = () => {
   const queryClient = useQueryClient();
   const { message, notification } = App.useApp();
 
-  return useMutation(remove, {
+  return useMutation(removeTask, {
     onMutate: () => {
       message.open(
-        messageObject(
-          "loading",
-          "Suppression en cours...",
-          "useMutationDelete",
-        ),
+        messageObject("loading", "Suppression...", "useMutationDeleteTask"),
       );
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries(["someQuery"]);
+      queryClient.invalidateQueries(["tasks"]);
       message.success(
-        messageObject("success", "Suppression réussie", "useMutationDelete"),
+        messageObject("success", "Check !", "useMutationDeleteTask"),
       );
     },
-    onError: (error) => {
-      message.error(
-        messageObject("error", "Une erreur est survenue", "useMutationDelete"),
-      );
-      notification.error(
-        toastObject(
-          "error",
-          "Suppression échouée",
-          "Vérifiez votre connexion internet ou contactez l'administrateur",
-        ),
-      );
+    onError: (error: AxiosError) => {
+      if (error.response && error.response.status === 404)
+        message.error(
+          messageObject(
+            "error",
+            "Cette tâche n'existe plus !",
+            "useMutationDeleteTask",
+          ),
+        );
+      else
+        message.error(
+          messageObject(
+            "error",
+            "Une erreur est survenue",
+            "useMutationDeleteTask",
+          ),
+        );
     },
   });
 };

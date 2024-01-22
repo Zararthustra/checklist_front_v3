@@ -140,3 +140,6 @@
 .ant-modal-content {
   @apply shadow-none dark:bg-zinc-900 dark:text-white !important;
 }
+.ant-input-clear-icon {
+  @apply dark:text-zinc-500 !important;
+}
