@@ -120,6 +120,9 @@
   .bubble--info {
     @apply border-[1px] border-solid border-blue-800 bg-blue-50 text-blue-800 dark:border-blue-50 dark:bg-blue-400 dark:text-blue-50;
   }
+  .bubble--warning {
+    @apply border-[1px] border-solid border-yellow-600 bg-yellow-50 text-yellow-600 dark:border-yellow-200 dark:bg-yellow-700 dark:text-yellow-200;
+  }
 }
 
 @layer utilities {

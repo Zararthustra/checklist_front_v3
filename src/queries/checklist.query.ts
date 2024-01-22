@@ -28,6 +28,17 @@ export const createTask = async ({
   return data;
 };
 
+export const createCategory = async ({
+  name,
+  color,
+}: {
+  name: string;
+  color: string;
+}) => {
+  const { data } = await axiosInstance.post("/category", { name, color });
+  return data;
+};
+
 // RETRIEVE
 export const retrieveCategories = async (): Promise<ICategory[]> => {
   const { data } = await axiosInstance.get("/category");
@@ -39,20 +50,25 @@ export const retrieveTasks = async (): Promise<ITask[]> => {
   return data;
 };
 
-export const retrieveOne = async (id: number): Promise<any> => {
-  const { data } = await axiosInstance.get(`/endpoint/${id}`);
-  return data;
-};
-
 // UPDATE
-export const update = async ({ payload, id }: { payload: any; id: number }) => {
-  const { data } = await axiosInstance.patch(`/endpoint/${id}`, payload);
+export const updateCategory = async ({
+  payload,
+  id,
+}: {
+  payload: any;
+  id: string;
+}) => {
+  const { data } = await axiosInstance.patch(`/category/${id}`, payload);
   return data;
 };
 
 // DELETE
 export const removeTask = async (id: string): Promise<any> => {
   await axiosInstance.delete(`/tasks/${id}`);
+};
+
+export const removeCategory = async (id: string): Promise<any> => {
+  await axiosInstance.delete(`/category/${id}`);
 };
 
 // ==========
@@ -62,7 +78,7 @@ export const removeTask = async (id: string): Promise<any> => {
 // CREATE
 export const useMutationCreateTask = () => {
   const queryClient = useQueryClient();
-  const { message, notification } = App.useApp();
+  const { message } = App.useApp();
 
   return useMutation(createTask, {
     onMutate: () => {
@@ -81,20 +97,38 @@ export const useMutationCreateTask = () => {
         ),
       );
     },
-    onError: (error) => {
+    onError: (error: AxiosError) => {
       message.error(
+        messageObject("error", error.message, "useMutationCreateTask"),
+      );
+    },
+  });
+};
+
+export const useMutationCreateCategory = () => {
+  const queryClient = useQueryClient();
+  const { message } = App.useApp();
+
+  return useMutation(createCategory, {
+    onMutate: () => {
+      message.open(
+        messageObject("loading", "Ajout...", "useMutationCreateCategory"),
+      );
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(["categories"]);
+
+      message.success(
         messageObject(
-          "error",
-          "Une erreur est survenue",
-          "useMutationCreateTask",
+          "success",
+          "Catégorie " + response.name + " ajoutée",
+          "useMutationCreateCategory",
         ),
       );
-      notification.error(
-        toastObject(
-          "error",
-          "Impossible de créer la séance",
-          "Vérifiez votre connexion internet ou contactez l'administrateur",
-        ),
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject("error", error.message, "useMutationCreateCategory"),
       );
     },
   });
@@ -135,48 +169,16 @@ export const useQueryRetrieveTasks = (isAuth: boolean) => {
   });
 };
 
-export const useQueryRetrieveOne = (id: number) => {
-  const { notification } = App.useApp();
-
-  return useQuery(["someQuery", id], () => retrieveOne(id), {
-    // Stale 5min
-    staleTime: 60_000 * 5,
-    onError: (error) =>
-      notification.error(
-        toastObject(
-          "error",
-          "Impossible de récupérer les données",
-          "Vérifiez votre connexion internet ou contactez l'administrateur",
-        ),
-      ),
-  });
-};
-
 // UPDATE
-export const useMutationUpdate = () => {
+export const useMutationUpdateCategory = () => {
   const queryClient = useQueryClient();
   const { message, notification } = App.useApp();
 
-  return useMutation(update, {
-    onMutate: () => {
-      message.open(
-        messageObject(
-          "loading",
-          "Modification en cours...",
-          "useMutationUpdate",
-        ),
-      );
-    },
+  return useMutation(updateCategory, {
     onSuccess: (response) => {
-      queryClient.invalidateQueries(["someQuery"]);
-      message.success(
-        messageObject("success", "Modification réussie", "useMutationUpdate"),
-      );
+      queryClient.invalidateQueries(["categories"]);
     },
     onError: (error) => {
-      message.error(
-        messageObject("error", "Une erreur est survenue", "useMutationUpdate"),
-      );
       notification.error(
         toastObject(
           "error",
@@ -191,7 +193,7 @@ export const useMutationUpdate = () => {
 // DELETE
 export const useMutationDeleteTask = () => {
   const queryClient = useQueryClient();
-  const { message, notification } = App.useApp();
+  const { message } = App.useApp();
 
   return useMutation(removeTask, {
     onMutate: () => {
@@ -216,11 +218,44 @@ export const useMutationDeleteTask = () => {
         );
       else
         message.error(
+          messageObject("error", error.message, "useMutationDeleteTask"),
+        );
+    },
+  });
+};
+
+export const useMutationDeleteCategory = () => {
+  const queryClient = useQueryClient();
+  const { message } = App.useApp();
+
+  return useMutation(removeCategory, {
+    onMutate: () => {
+      message.open(
+        messageObject("loading", "Suppression...", "useMutationDeleteCategory"),
+      );
+    },
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(["categories"]);
+      message.success(
+        messageObject(
+          "success",
+          "Catégorie supprimée",
+          "useMutationDeleteCategory",
+        ),
+      );
+    },
+    onError: (error: AxiosError) => {
+      if (error.response && error.response.status === 404)
+        message.error(
           messageObject(
             "error",
-            "Une erreur est survenue",
-            "useMutationDeleteTask",
+            "Cette catégorie n'existe plus !",
+            "useMutationDeleteCategory",
           ),
+        );
+      else
+        message.error(
+          messageObject("error", error.message, "useMutationDeleteCategory"),
         );
     },
   });

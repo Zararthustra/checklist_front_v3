@@ -1,6 +1,5 @@
-import { Input } from "antd";
-import { App, ConfigProvider } from "antd";
 import { useContext, useEffect, useState } from "react";
+import { Input, Popover, App, ConfigProvider } from "antd";
 
 import {
   IconAddTask,
@@ -10,8 +9,16 @@ import {
   IconVisible,
 } from "@assets/index";
 import { ITask } from "@interfaces/index";
-import { Button, Task } from "@components/index";
-import { useMutationCreateTask } from "@queries/index";
+import {
+  useMutationCreateTask,
+  useMutationUpdateCategory,
+} from "@queries/index";
+import {
+  Button,
+  ModalConfirmDelete,
+  PopOverPalette,
+  Task,
+} from "@components/index";
 import AppContext, { IAppContext } from "@services/AppContext";
 import { capitalizeFirstLetter, messageObject } from "@utils/formatters";
 
@@ -31,9 +38,12 @@ export const Category = ({
   tasks,
 }: ICategoryProps) => {
   const { message } = App.useApp();
-  const [inputValue, setInputValue] = useState("");
   const { darkMode } = useContext<IAppContext>(AppContext);
-  const { mutate, isLoading, isSuccess } = useMutationCreateTask();
+  const [inputValue, setInputValue] = useState<string>("");
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [openPopover, setOpenPopover] = useState<boolean>(false);
+  const { mutate: updateCategory } = useMutationUpdateCategory();
+  const { mutate: createTask, isLoading, isSuccess } = useMutationCreateTask();
 
   const handleAddTask = (e: any) => {
     e.preventDefault();
@@ -41,7 +51,7 @@ export const Category = ({
       message.success(messageObject("warning", "Il n'y a rien à ajouter !"));
       return;
     }
-    mutate({
+    createTask({
       name: inputValue,
       categoryId: id,
     });
@@ -52,70 +62,118 @@ export const Category = ({
   }, [isSuccess]);
 
   return (
-    <div className="w-[95%] max-w-[25rem]">
-      <header
-        className="rounded-tl-xl px-4 text-zinc-100 dark:text-zinc-900"
-        style={{ background: color }}
-      >
-        <div className="flex items-center justify-between py-2">
-          <IconPalette />
-          {hidden ? (
-            <IconHidden
-            //  onClick={() => setVisible(!visible)}
-            />
-          ) : (
-            <IconVisible
-            // onClick={() => setVisible(!visible)}
-            />
-          )}
-          <IconTrash />
-        </div>
-        <h2 className="py-1 text-center">{capitalizeFirstLetter(name)}</h2>
-      </header>
+    <>
+      <ModalConfirmDelete
+        showModal={isDeleting}
+        setShowModal={setIsDeleting}
+        categoryId={id}
+        categoryName={name}
+      />
 
-      <div className="my-2 flex flex-col gap-2">
-        {tasks.map((task, index) => (
-          <Task key={index} id={task.id} name={task.name} color={color} />
-        ))}
-      </div>
-
-      <footer className="flex">
-        <form
-          className="flex w-full text-zinc-100 dark:text-zinc-900"
-          onSubmit={handleAddTask}
+      <div className="w-[95%] max-w-[25rem]">
+        <header
+          className="rounded-tl-xl px-4 text-zinc-100 dark:text-zinc-900"
+          style={{ background: color }}
         >
-          <ConfigProvider
-            theme={{
-              components: {
-                Input: {
-                  colorBgContainer: darkMode ? "#18181b" : "white",
-                  colorText: darkMode ? "white" : "black",
-                },
-              },
-            }}
-          >
-            <Input
-              allowClear
-              id="task"
-              autoComplete="task"
-              onChange={(e) => setInputValue(e.target.value)}
-              value={inputValue}
+          <div className="flex items-center justify-between py-2">
+            <Popover
+              content={
+                <PopOverPalette
+                  categoryId={id}
+                  setOpenPopover={setOpenPopover}
+                />
+              }
+              title="Choisissez une couleur"
+              trigger="click"
+              open={openPopover}
+              onOpenChange={() => setOpenPopover(!openPopover)}
+            >
+              <IconPalette className="cursor-pointer" />
+            </Popover>
+            {hidden ? (
+              <IconHidden
+                onClick={() =>
+                  updateCategory({
+                    payload: {
+                      isHidden: false,
+                    },
+                    id,
+                  })
+                }
+                className="cursor-pointer"
+              />
+            ) : (
+              <IconVisible
+                onClick={() =>
+                  updateCategory({
+                    payload: {
+                      isHidden: true,
+                    },
+                    id,
+                  })
+                }
+                className="cursor-pointer"
+              />
+            )}
+            <IconTrash
+              className="cursor-pointer"
+              onClick={() => setIsDeleting(true)}
             />
-          </ConfigProvider>
+          </div>
+          <h2 className="py-1 text-center">{capitalizeFirstLetter(name)}</h2>
+        </header>
 
-          <Button
-            type="submit"
-            disabled={isLoading}
-            loading={isLoading}
-            style={{
-              background: color[0] === "l" ? color.split(",")[1] : color,
-            }}
-            className="ml-1 rounded-br-xl px-3 py-2"
+        {!hidden && !!tasks.length && (
+          <div className="my-2 flex flex-col gap-2">
+            {tasks.map((task, index) => (
+              <Task key={index} id={task.id} name={task.name} color={color} />
+            ))}
+          </div>
+        )}
+
+        <footer className="flex">
+          <form
+            className="flex w-full text-zinc-100 dark:text-zinc-900"
+            onSubmit={handleAddTask}
           >
-            <IconAddTask className="" />
-          </Button>
-        </form>
-      </footer>
-    </div>
+            <ConfigProvider
+              theme={{
+                components: {
+                  Input: {
+                    colorBgContainer: darkMode ? "#18181b" : "white",
+                    colorText: darkMode ? "white" : "black",
+                  },
+                },
+              }}
+            >
+              <Input
+                allowClear
+                style={{
+                  // Linear gradient on border
+                  border: "1px solid " + (color[0] === "#" ? color : ""),
+                  borderImageSlice: color[0] === "l" ? "1" : "",
+                  borderImageSource: color[0] === "l" ? color : "",
+                }}
+                id="task"
+                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
+              />
+            </ConfigProvider>
+
+            <Button
+              type="submit"
+              disabled={isLoading}
+              loading={isLoading}
+              style={{
+                background: color[0] === "l" ? color.split(",")[1] : color,
+              }}
+              className="rounded-br-xl px-3 py-2"
+            >
+              <IconAddTask className="" />
+            </Button>
+          </form>
+        </footer>
+      </div>
+    </>
   );
 };

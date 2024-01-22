@@ -10,10 +10,6 @@ export const Task = ({ id, color, name }: ITaskProps) => {
   const { mutate: deleteTask, isLoading: deleteLoading } =
     useMutationDeleteTask();
 
-  const handleDelTask = (id: string) => {
-    deleteTask(id);
-  };
-
   return (
     <div
       className={
@@ -26,7 +22,7 @@ export const Task = ({ id, color, name }: ITaskProps) => {
         borderImageSlice: color[0] === "l" ? "1" : "",
         borderImageSource: color[0] === "l" ? color : "",
       }}
-      onClick={() => (deleteLoading ? null : handleDelTask(id))}
+      onClick={() => (deleteLoading ? null : deleteTask(id))}
     >
       {deleteLoading ? (
         <IconLoader color={color[0] === "l" ? color.split(",")[1] : color} />

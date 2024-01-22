@@ -1,17 +1,4 @@
 export {
-  create,
-  retrieveAll,
-  retrieveOne,
-  update,
-  remove,
-  useMutationCreate,
-  useQueryRetrieveAll,
-  useQueryRetrieveOne,
-  useMutationUpdate,
-  useMutationDelete,
-} from "./template.query";
-
-export {
   login,
   reconnect,
   register,
@@ -25,4 +12,7 @@ export {
   useQueryRetrieveTasks,
   useMutationCreateTask,
   useMutationDeleteTask,
+  useMutationUpdateCategory,
+  useMutationDeleteCategory,
+  useMutationCreateCategory,
 } from "./checklist.query";
