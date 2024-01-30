@@ -5,6 +5,7 @@ import {
   IconAddTask,
   IconHidden,
   IconInfo,
+  IconLoader,
   IconPalette,
   IconSMS,
   IconTrash,
@@ -44,7 +45,8 @@ export const Category = ({
   const [inputValue, setInputValue] = useState<string>("");
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [openPopover, setOpenPopover] = useState<boolean>(false);
-  const { mutate: updateCategory } = useMutationUpdateCategory();
+  const { mutate: updateCategory, isLoading: loadingUpdate } =
+    useMutationUpdateCategory();
   const { mutate: createTask, isLoading, isSuccess } = useMutationCreateTask();
 
   const handleAddTask = (e: any) => {
@@ -62,7 +64,7 @@ export const Category = ({
   useEffect(() => {
     if (isSuccess) setInputValue("");
   }, [isSuccess]);
-  console.log(tasks.map((task) => task.name).join(", "));
+
   return (
     <>
       <ModalConfirmDelete
@@ -72,7 +74,7 @@ export const Category = ({
         categoryName={name}
       />
 
-      <div className="w-[95%] max-w-[25rem]">
+      <div className="h-fit w-[95%] max-w-[25rem]">
         <header
           className="rounded-tl-xl px-4 text-zinc-100 dark:text-zinc-900"
           style={{ background: color }}
@@ -103,7 +105,9 @@ export const Category = ({
             >
               <IconSMS />
             </a>
-            {hidden ? (
+            {loadingUpdate ? (
+              <IconLoader />
+            ) : hidden ? (
               <IconHidden
                 onClick={() =>
                   updateCategory({
@@ -182,7 +186,7 @@ export const Category = ({
               }}
               className="rounded-br-xl px-3 py-2"
             >
-              <IconAddTask className="" />
+              <IconAddTask />
             </Button>
           </form>
         </footer>
