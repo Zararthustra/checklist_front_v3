@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/Zararthustra/checklist_front_v3/compare/v3.0.0...v3.1.0) (2024-01-31)
+
+
+### Features
+
+* **Category:** add send checklist by sms option ([db0f5c7](https://github.com/Zararthustra/checklist_front_v3/commit/db0f5c74e5e7d6b1a27280f949e1e1e9b323326f))
+* **Loader:** add loading state when fetching main data ([ec607ed](https://github.com/Zararthustra/checklist_front_v3/commit/ec607edd2ff60d4b6debb03819e5317e96084385))
+
+
+### Bug Fixes
+
+* remove console.log, add loader on hide ([9e26d13](https://github.com/Zararthustra/checklist_front_v3/commit/9e26d136fd4647b70c42f7a6576d941972c83498))
+
 ## 3.0.0 (2024-01-22)
 
 
