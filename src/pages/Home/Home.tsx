@@ -4,14 +4,22 @@ import {
   useQueryRetrieveCategories,
   useQueryRetrieveTasks,
 } from "@queries/index";
+import { IconLoader } from "@assets/index";
 import { getLS } from "@services/localStorageService";
 import { Category, Login, ModalReconnect, Navbar } from "@components/index";
 
 export const Home = () => {
   const [isAuth, setIsAuth] = useState(!!getLS("accessToken"));
-  const { data: categories, error: errorCategories } =
-    useQueryRetrieveCategories(isAuth);
-  const { data: tasks, error: errorTasks } = useQueryRetrieveTasks(isAuth);
+  const {
+    data: categories,
+    error: errorCategories,
+    isLoading: loadingCategories,
+  } = useQueryRetrieveCategories(isAuth);
+  const {
+    data: tasks,
+    error: errorTasks,
+    isLoading: loadingTasks,
+  } = useQueryRetrieveTasks(isAuth);
 
   if (!isAuth) return <Login setIsAuth={setIsAuth} />;
 
@@ -28,6 +36,12 @@ export const Home = () => {
       <Navbar />
       <main className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100">
         <div className="my-5 flex w-full flex-wrap justify-center gap-5">
+          {(loadingCategories || loadingTasks) && (
+            <div className="flex animate-pulse flex-col items-center gap-2">
+              <IconLoader width={100} height={100} />
+              <i>Chargement de la checklist...</i>
+            </div>
+          )}
           {categories &&
             tasks &&
             categories.map((category, index) => (
