@@ -1,3 +1,4 @@
+import { Empty } from "antd";
 import { useState } from "react";
 
 import {
@@ -22,7 +23,21 @@ export const Home = () => {
   } = useQueryRetrieveTasks(isAuth);
 
   if (!isAuth) return <Login setIsAuth={setIsAuth} />;
-
+  if (!!!tasks || !!!categories)
+    return (
+      <>
+        <Navbar />
+        <main className="mt-[100px]">
+          <Empty
+            description={
+              <p className="dark:text-zinc-100">
+                Une erreur est survenue, veuillez vous reconnecter.
+              </p>
+            }
+          />
+        </main>
+      </>
+    );
   return (
     <>
       {(errorTasks || errorCategories) && (
