@@ -15,4 +15,11 @@ export {
   useMutationUpdateCategory,
   useMutationDeleteCategory,
   useMutationCreateCategory,
+  createTask,
+  createCategory,
+  retrieveCategories,
+  retrieveTasks,
+  updateCategory,
+  removeCategory,
+  removeTask,
 } from "./checklist.query";

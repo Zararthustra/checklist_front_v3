@@ -17,7 +17,7 @@ export const createTask = async ({
 }: {
   name: string;
   categoryId: string;
-}) => {
+}): Promise<ITask> => {
   const { data } = await axiosInstance.post(
     "/tasks",
     { name },
@@ -34,7 +34,7 @@ export const createCategory = async ({
 }: {
   name: string;
   color: string;
-}) => {
+}): Promise<ICategory> => {
   const { data } = await axiosInstance.post("/category", { name, color });
   return data;
 };
@@ -57,7 +57,7 @@ export const updateCategory = async ({
 }: {
   payload: any;
   id: string;
-}) => {
+}): Promise<ICategory> => {
   const { data } = await axiosInstance.patch(`/category/${id}`, payload);
   return data;
 };
