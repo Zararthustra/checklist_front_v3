@@ -12,6 +12,7 @@ export const Task = ({ id, color, name }: ITaskProps) => {
 
   return (
     <div
+      data-testid="task"
       className={
         "flex cursor-pointer justify-center p-2 text-center " +
         (deleteLoading ? "cursor-wait" : "")

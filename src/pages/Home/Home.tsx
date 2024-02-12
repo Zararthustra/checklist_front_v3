@@ -27,7 +27,7 @@ export const Home = () => {
     return (
       <>
         <Navbar />
-        <main className="mt-[100px]">
+        <main data-testid="home-nodata" className="mt-[100px]">
           <Empty
             description={
               <p className="dark:text-zinc-100">
@@ -49,7 +49,10 @@ export const Home = () => {
       )}
 
       <Navbar />
-      <main className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100">
+      <main
+        data-testid="home"
+        className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100"
+      >
         <div className="my-5 flex w-full flex-wrap justify-center gap-5">
           {(loadingCategories || loadingTasks) && (
             <div className="flex animate-pulse flex-col items-center gap-2">

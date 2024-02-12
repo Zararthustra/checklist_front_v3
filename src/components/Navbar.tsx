@@ -64,6 +64,7 @@ export const Navbar = () => {
         placeholder="Nouvelle catégorie"
         onChange={(e) => setInputValue(e.target.value)}
         value={inputValue}
+        data-testid="category-input"
       />
     </form>,
     <div className="flex">

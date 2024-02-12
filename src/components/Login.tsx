@@ -54,7 +54,10 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
 
   return (
     <>
-      <main className="justify-centers flex h-[100dvh] flex-col items-center bg-zinc-100 px-2 dark:text-zinc-100">
+      <main
+        data-testid="login"
+        className="justify-centers flex h-[100dvh] flex-col items-center bg-zinc-100 px-2 dark:text-zinc-100"
+      >
         <IconLogo width={300} height={300} className="mt-10" />
         <form className="max-w-[15rem]" onSubmit={handleSubmit}>
           {/* Compte */}
@@ -68,6 +71,7 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
               autoComplete="username"
               status={touched.username && errors.username ? "error" : ""}
               {...getFieldProps("username")}
+              data-testid="login-username"
             />
             {touched.username && errors.username && (
               <p className="font-bold text-red-500">{errors.username}</p>
@@ -85,6 +89,7 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
               autoComplete="current-password"
               status={touched.password && errors.password ? "error" : ""}
               {...getFieldProps("password")}
+              data-testid="login-password"
             />
             {touched.password && errors.password && (
               <p className="font-bold text-red-500">{errors.password}</p>
@@ -96,7 +101,8 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
             type="submit"
             disabled={!!errors.username || !!errors.password}
             loading={loadingLogin || loadingRegister}
-            className="my-5 w-full"
+            className="my-5 w-full disabled:bg-zinc-200"
+            dataTestid="login-submit"
           >
             {createAcc ? "Créer mon compte" : "Se connecter"}
           </Button>

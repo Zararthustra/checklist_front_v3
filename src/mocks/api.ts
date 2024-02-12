@@ -1,62 +1,30 @@
 import { HttpResponse, http } from "msw";
 
 import { baseURL } from "@queries/axios";
-import { userMock, loginResponseMock } from "@mocks/index";
+import { categories, tasks, loginResponseMock } from "@mocks/index";
 
 export const endpoint = (endpoint: string): string => baseURL + endpoint;
 
 export const handlers = [
   // Task
   http.post(endpoint("tasks"), () => {
-    return HttpResponse.json({
-      id: "0d92b2a1-1d5d-4280-a914-ee0448da381d",
-      name: "my task",
-      owner: 4,
-      category: "6b7727d5-e8f8-4d4b-b084-30ced6ceb96e",
-    });
+    return HttpResponse.json(tasks[0]);
   }),
   http.get(endpoint("tasks"), () => {
-    return HttpResponse.json([
-      {
-        id: "0d92b2a1-1d5d-4280-a914-ee0448da381d",
-        name: "my task",
-        owner: 4,
-        category: "6b7727d5-e8f8-4d4b-b084-30ced6ceb96e",
-      },
-    ]);
+    return HttpResponse.json(tasks);
   }),
   http.delete(endpoint("tasks/:id"), () => {
     return HttpResponse.json(undefined);
   }),
   // Category
   http.post(endpoint("category"), () => {
-    return HttpResponse.json({
-      id: "411ac8bb-e1e2-4616-8f91-24b03c90f634",
-      name: "my category",
-      color: "#0f0",
-      isHidden: null,
-      owner: 4,
-    });
+    return HttpResponse.json(categories[0]);
   }),
   http.get(endpoint("category"), () => {
-    return HttpResponse.json([
-      {
-        id: "411ac8bb-e1e2-4616-8f91-24b03c90f634",
-        name: "my category",
-        color: "#0f0",
-        isHidden: null,
-        owner: 4,
-      },
-    ]);
+    return HttpResponse.json(categories);
   }),
   http.patch(endpoint("category/:id"), () => {
-    return HttpResponse.json({
-      id: "411ac8bb-e1e2-4616-8f91-24b03c90f634",
-      name: "my category",
-      color: "#0ff",
-      isHidden: null,
-      owner: 4,
-    });
+    return HttpResponse.json(categories[1]);
   }),
   http.delete(endpoint("category/:id"), () => {
     return HttpResponse.json(undefined);

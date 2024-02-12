@@ -10,6 +10,7 @@ interface IButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   variant?: "ok" | "ko";
   loading?: boolean;
   onClick?: any;
+  dataTestid?: string;
 }
 
 export const Button = ({
@@ -23,8 +24,10 @@ export const Button = ({
   className = "",
   onClick,
   children,
+  dataTestid,
 }: IButtonProps) => (
   <button
+    data-testid={dataTestid}
     disabled={disabled}
     type={type}
     style={style}

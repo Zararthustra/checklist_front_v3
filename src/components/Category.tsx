@@ -74,7 +74,7 @@ export const Category = ({
         categoryName={name}
       />
 
-      <div className="h-fit w-[95%] max-w-[25rem]">
+      <div data-testid="category" className="h-fit w-[95%] max-w-[25rem]">
         <header
           className="rounded-tl-xl px-4 text-zinc-100 dark:text-zinc-900"
           style={{ background: color }}
@@ -174,6 +174,7 @@ export const Category = ({
                 id="task"
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
+                data-testid="task-input"
               />
             </ConfigProvider>
 
