@@ -1,10 +1,11 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { App } from "antd";
 import { AxiosError } from "axios";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import axiosInstance from "./axios";
+
 import { ICategory, ITask } from "@interfaces/index";
-import { toastObject, messageObject } from "@utils/formatters";
+import { messageObject, toastObject } from "@utils/formatters";
 
 // =====
 // Axios
@@ -172,13 +173,13 @@ export const useQueryRetrieveTasks = (isAuth: boolean) => {
 // UPDATE
 export const useMutationUpdateCategory = () => {
   const queryClient = useQueryClient();
-  const { message, notification } = App.useApp();
+  const { notification } = App.useApp();
 
   return useMutation(updateCategory, {
-    onSuccess: (response) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["categories"]);
     },
-    onError: (error) => {
+    onError: () => {
       notification.error(
         toastObject(
           "error",
@@ -201,7 +202,7 @@ export const useMutationDeleteTask = () => {
         messageObject("loading", "Suppression...", "useMutationDeleteTask"),
       );
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["tasks"]);
       message.success(
         messageObject("success", "Check !", "useMutationDeleteTask"),
@@ -234,7 +235,7 @@ export const useMutationDeleteCategory = () => {
         messageObject("loading", "Suppression...", "useMutationDeleteCategory"),
       );
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["categories"]);
       message.success(
         messageObject(

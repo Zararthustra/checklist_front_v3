@@ -1,16 +1,17 @@
+import { useMutation } from "@tanstack/react-query";
 import { App } from "antd";
 import { AxiosError } from "axios";
 import { jwtDecode } from "jwt-decode";
-import { useMutation } from "@tanstack/react-query";
 
+import axiosInstance from "./axios";
+
+import { ILoginRequest, ILoginResponse } from "@interfaces/index";
 import {
   setAccessToken,
   setLS,
   setRefreshToken,
 } from "@services/localStorageService";
-import axiosInstance from "./axios";
-import { toastObject, messageObject } from "@utils/formatters";
-import { ILoginRequest, ILoginResponse } from "@interfaces/index";
+import { messageObject, toastObject } from "@utils/formatters";
 
 // =====
 // Axios
@@ -120,7 +121,7 @@ export const useMutationReconnect = () => {
         );
       }
     },
-    onError: (error) =>
+    onError: () =>
       notification.error(
         toastObject(
           "error",
@@ -145,7 +146,7 @@ export const useMutationRegister = () => {
         ),
       );
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       message.success(
         messageObject(
           "success",

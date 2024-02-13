@@ -1,5 +1,7 @@
-import { expect, test, describe, assertType } from "vitest";
+import { assertType, describe, expect, test } from "vitest";
 
+import { ICategory, ITask } from "@interfaces/index";
+import { categories, tasks } from "@mocks/index";
 import {
   createCategory,
   createTask,
@@ -9,8 +11,6 @@ import {
   retrieveTasks,
   updateCategory,
 } from "@queries/index";
-import { categories, tasks } from "@mocks/index";
-import { ICategory, ITask } from "@interfaces/index";
 
 describe("Queries \t Task", () => {
   test("Create task", async () => {

@@ -1,27 +1,26 @@
 import { useContext, useEffect, useState } from "react";
-import { Input, Popover, App, ConfigProvider } from "antd";
+import { App, ConfigProvider, Input, Popover } from "antd";
 
 import {
   IconAddTask,
   IconHidden,
-  IconInfo,
   IconLoader,
   IconPalette,
   IconSMS,
   IconTrash,
   IconVisible,
 } from "@assets/index";
-import { ITask } from "@interfaces/index";
-import {
-  useMutationCreateTask,
-  useMutationUpdateCategory,
-} from "@queries/index";
 import {
   Button,
   ModalConfirmDelete,
   PopOverPalette,
   Task,
 } from "@components/index";
+import { ITask } from "@interfaces/index";
+import {
+  useMutationCreateTask,
+  useMutationUpdateCategory,
+} from "@queries/index";
 import AppContext, { IAppContext } from "@services/AppContext";
 import { capitalizeFirstLetter, messageObject } from "@utils/formatters";
 
@@ -51,7 +50,7 @@ export const Category = ({
 
   const handleAddTask = (e: any) => {
     e.preventDefault();
-    if (!!!inputValue) {
+    if (!inputValue) {
       message.success(messageObject("warning", "Il n'y a rien à ajouter !"));
       return;
     }

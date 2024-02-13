@@ -1,4 +1,20 @@
 export {
+  createCategory,
+  createTask,
+  removeCategory,
+  removeTask,
+  retrieveCategories,
+  retrieveTasks,
+  updateCategory,
+  useMutationCreateCategory,
+  useMutationCreateTask,
+  useMutationDeleteCategory,
+  useMutationDeleteTask,
+  useMutationUpdateCategory,
+  useQueryRetrieveCategories,
+  useQueryRetrieveTasks,
+} from "./checklist.query";
+export {
   login,
   reconnect,
   register,
@@ -6,20 +22,3 @@ export {
   useMutationReconnect,
   useMutationRegister,
 } from "./user.query";
-
-export {
-  useQueryRetrieveCategories,
-  useQueryRetrieveTasks,
-  useMutationCreateTask,
-  useMutationDeleteTask,
-  useMutationUpdateCategory,
-  useMutationDeleteCategory,
-  useMutationCreateCategory,
-  createTask,
-  createCategory,
-  retrieveCategories,
-  retrieveTasks,
-  updateCategory,
-  removeCategory,
-  removeTask,
-} from "./checklist.query";

@@ -1,6 +1,6 @@
-import { expect, test, describe, vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { findByText, fireEvent, render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
 
 import { Category } from "@components/index";
 import { categories, tasks } from "@mocks/index";

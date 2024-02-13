@@ -1,14 +1,14 @@
-import { Input, message } from "antd";
-import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Input, message } from "antd";
+import { jwtDecode } from "jwt-decode";
 
-import { flat, gradients } from "@data/colors";
-import { messageObject } from "@utils/formatters";
 import { IconLogo, IconOnOff } from "@assets/index";
-import { clearLS, getLS } from "@services/localStorageService";
-import { ModalReconnect, DarkModeToggle } from "@components/index";
+import { DarkModeToggle, ModalReconnect } from "@components/index";
+import { flat, gradients } from "@data/colors";
 import { useMutationCreateCategory } from "@queries/checklist.query";
+import { clearLS, getLS } from "@services/localStorageService";
+import { messageObject } from "@utils/formatters";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export const Navbar = () => {
   const dummyToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
   const accessToken = jwtDecode<any>(
-    !!getLS("accessToken") ? getLS("accessToken") : dummyToken,
+    getLS("accessToken") ? getLS("accessToken") : dummyToken,
   ).exp;
   const showReconnectModal = accessToken < now;
   const colorsArray: string[] = [...flat, ...gradients];
@@ -34,7 +34,7 @@ export const Navbar = () => {
 
   const handleAddCategory = (e: any) => {
     e.preventDefault();
-    if (!!!inputValue) {
+    if (!inputValue) {
       message.config({
         top: 40,
       });
@@ -52,8 +52,8 @@ export const Navbar = () => {
   }, [isSuccess]);
 
   const items = [
-    <IconLogo width={50} height={50} />,
-    <form className="mx-5" onSubmit={handleAddCategory}>
+    <IconLogo key={1} width={50} height={50} />,
+    <form key={2} className="mx-5" onSubmit={handleAddCategory}>
       <Input
         allowClear
         style={{
@@ -67,7 +67,7 @@ export const Navbar = () => {
         data-testid="category-input"
       />
     </form>,
-    <div className="flex">
+    <div key={3} className="flex">
       <DarkModeToggle />
       <IconOnOff
         width={24}

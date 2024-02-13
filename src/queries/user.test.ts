@@ -1,8 +1,8 @@
-import { expect, test, describe, assertType } from "vitest";
+import { assertType, describe, expect, test } from "vitest";
 
 import { ILoginResponse } from "@interfaces/index";
-import { login, reconnect, register } from "@queries/index";
 import { loginRequestMock, loginResponseMock } from "@mocks/index";
+import { login, reconnect, register } from "@queries/index";
 
 describe("Queries => User", () => {
   test("POST \t Register", async () => {

@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { Modal } from "antd";
 
-import { Button } from "@components/index";
 import { IconTrash, IconWarning } from "@assets/index";
+import { Button } from "@components/index";
 import { useMutationDeleteCategory } from "@queries/index";
-import { useEffect } from "react";
 
 interface IModalConfirmDeleteProps {
   showModal: boolean;

@@ -1,15 +1,14 @@
-import { setupServer } from "msw/node";
-import { cleanup } from "@testing-library/react";
-import { beforeAll, afterAll, afterEach, expect, vi } from "vitest";
+import "@testing-library/jest-dom";
 
 // Extend "expect" method with @testing-library/jest-dom methods like "toBeInTheDocument()"
 import * as matchers from "@testing-library/jest-dom/matchers";
-import "@testing-library/jest-dom";
-expect.extend(matchers);
+import { cleanup } from "@testing-library/react";
+import { setupServer } from "msw/node";
+import { afterAll, afterEach, beforeAll, expect, vi } from "vitest";
 
 import { handlers } from "@mocks/api";
-import { login, register } from "@queries/index";
-import { loginRequestMock } from "./mocks";
+
+expect.extend(matchers);
 
 // Mock server to catch API requests
 export const server = setupServer(...handlers);
@@ -75,7 +74,7 @@ beforeAll(() => {
         return store;
       },
       length: 0,
-      key(index: number): string | null {
+      key(): string | null {
         return null;
       },
     };

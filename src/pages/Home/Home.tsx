@@ -1,13 +1,13 @@
-import { Empty } from "antd";
 import { useState } from "react";
+import { Empty } from "antd";
 
+import { IconLoader } from "@assets/index";
+import { Category, Login, ModalReconnect, Navbar } from "@components/index";
 import {
   useQueryRetrieveCategories,
   useQueryRetrieveTasks,
 } from "@queries/index";
-import { IconLoader } from "@assets/index";
 import { getLS } from "@services/localStorageService";
-import { Category, Login, ModalReconnect, Navbar } from "@components/index";
 
 export const Home = () => {
   const [isAuth, setIsAuth] = useState(!!getLS("accessToken"));
@@ -23,7 +23,7 @@ export const Home = () => {
   } = useQueryRetrieveTasks(isAuth);
 
   if (!isAuth) return <Login setIsAuth={setIsAuth} />;
-  if (!!!tasks || !!!categories)
+  if (!tasks || !categories)
     return (
       <>
         <Navbar />

@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import { expect, test, describe, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
 
 import { NotFound } from "./NotFound";
 

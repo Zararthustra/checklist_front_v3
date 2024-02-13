@@ -1,10 +1,10 @@
-import frFR from "antd/locale/fr_FR";
-import { ConfigProvider, App as AntApp } from "antd";
-import { useRegisterSW } from "virtual:pwa-register/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { App as AntApp, ConfigProvider } from "antd";
+import frFR from "antd/locale/fr_FR";
+import { useRegisterSW } from "virtual:pwa-register/react";
 
-import AppWrapper from "@services/AppWrapper";
 import { Home, NotFound } from "@pages/index";
+import AppWrapper from "@services/AppWrapper";
 
 const App = () => {
   const { updateServiceWorker } = useRegisterSW({
@@ -14,7 +14,7 @@ const App = () => {
     onOfflineReady() {
       console.log("Ready to work offline");
     },
-    onRegistered(r: any) {
+    onRegistered() {
       // eslint-disable-next-line prefer-template
       console.log("Service worker Registered");
     },

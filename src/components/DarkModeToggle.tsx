@@ -1,8 +1,8 @@
 import { useContext } from "react";
 
 import { IconDark, IconLight } from "@assets/index";
-import { setLS } from "@services/localStorageService";
 import AppContext, { IAppContext } from "@services/AppContext";
+import { setLS } from "@services/localStorageService";
 
 export const DarkModeToggle = () => {
   const appContext = useContext<IAppContext>(AppContext);

@@ -1,12 +1,12 @@
-import { App as AntApp } from "antd";
-import { expect, test, describe, vi } from "vitest";
-import { findByText, fireEvent, render, waitFor } from "@testing-library/react";
-
-import { Home } from "@pages/index";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setLS } from "@services/localStorageService";
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { fireEvent, render } from "@testing-library/react";
+import { App as AntApp } from "antd";
+import { describe, expect, test } from "vitest";
+
 import { categories, tasks } from "@mocks/index";
+import { Home } from "@pages/index";
+import { setLS } from "@services/localStorageService";
 
 describe("Home", () => {
   const setup = () => {

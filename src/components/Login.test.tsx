@@ -1,8 +1,8 @@
-import { expect, test, describe, vi } from "vitest";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, test, vi } from "vitest";
 
 import { Login } from "@components/index";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 describe("Login", () => {
   const setup = () => {

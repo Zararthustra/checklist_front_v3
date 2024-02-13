@@ -1,4 +1,11 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
+
+import {
+  capitalizeFirstLetter,
+  JsonToHtml,
+  messageObject,
+  toastObject,
+} from "./formatters";
 
 import {
   IconError,
@@ -7,12 +14,6 @@ import {
   IconSuccess,
   IconWarning,
 } from "@assets/index";
-import {
-  JsonToHtml,
-  capitalizeFirstLetter,
-  messageObject,
-  toastObject,
-} from "./formatters";
 
 describe("Format Text", () => {
   test("Capitalize first letter", async () => {
@@ -87,7 +88,7 @@ describe("Format Toast", () => {
   });
 
   test("Toast Default", async () => {
-    // @ts-ignore
+    // @ts-expect-error: desired bug
     const defaultToast = toastObject("bug", "title", "desc");
     expect(defaultToast).toStrictEqual({
       icon: <IconError />,
@@ -167,7 +168,7 @@ describe("Format Message", () => {
   });
 
   test("Message Default", async () => {
-    // @ts-ignore
+    // @ts-expect-error: desired bug
     const defaultMessage = messageObject("bug", "message");
     expect(defaultMessage).toStrictEqual({
       icon: <IconError className="text-red-500" />,

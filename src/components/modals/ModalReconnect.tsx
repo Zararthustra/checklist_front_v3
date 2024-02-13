@@ -1,10 +1,10 @@
-import { Modal } from "antd";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "antd";
 
+import { IconInfo, IconLogin, IconOnOff } from "@assets/index";
 import { Button } from "@components/index";
 import { useMutationReconnect } from "@queries/index";
-import { IconInfo, IconLogin, IconOnOff } from "@assets/index";
 import { clearLS, getLS } from "@services/localStorageService";
 
 interface IModalReconnectProps {

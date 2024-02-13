@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import AppContext from "@services/AppContext";
 import { getLS } from "./localStorageService";
+
+import AppContext from "@services/AppContext";
 
 const AppWrapper = () => {
   const [darkMode, setDarkMode] = useState<boolean>(

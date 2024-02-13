@@ -1,7 +1,7 @@
-import { HttpResponse, http } from "msw";
+import { http, HttpResponse } from "msw";
 
+import { categories, loginResponseMock, tasks } from "@mocks/index";
 import { baseURL } from "@queries/axios";
-import { categories, tasks, loginResponseMock } from "@mocks/index";
 
 export const endpoint = (endpoint: string): string => baseURL + endpoint;
 

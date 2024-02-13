@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Button } from "@components/index";
+
 import { IconHome, notfound } from "@assets/index";
+import { Button } from "@components/index";
 
 export const NotFound = () => (
   <main

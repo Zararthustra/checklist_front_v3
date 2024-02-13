@@ -5,7 +5,6 @@ export const IconHidden = ({
   height = 24,
   className = "",
   style,
-  color,
   onClick,
 }: IIcon) => (
   <svg
