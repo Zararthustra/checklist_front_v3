@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/Zararthustra/checklist_front_v3/compare/v3.1.0...v3.2.0) (2024-02-13)
+
+
+### Features
+
+* **Linters:** add linters ([b096e70](https://github.com/Zararthustra/checklist_front_v3/commit/b096e70e8554b973288495a3254a88f859001915))
+* **Test:** add queries tests ([92a59a7](https://github.com/Zararthustra/checklist_front_v3/commit/92a59a757b4eb45531b59314441df9f4c4e98143))
+* **Tests:** add Home, Login, Category & Task tests ([2ccef45](https://github.com/Zararthustra/checklist_front_v3/commit/2ccef45bdedaa5047edd30be3da7ec417b111731))
+
+
+### Bug Fixes
+
+* handle error ([6bd44cd](https://github.com/Zararthustra/checklist_front_v3/commit/6bd44cd575b28ef7fe2475453f9d38f8825b1e0f))
+
 ## [3.1.0](https://github.com/Zararthustra/checklist_front_v3/compare/v3.0.0...v3.1.0) (2024-01-31)
 
 ### Features
