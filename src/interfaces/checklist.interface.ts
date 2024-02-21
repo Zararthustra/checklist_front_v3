@@ -5,6 +5,7 @@ interface ICategory {
   name: string;
   color: string;
   isHidden: boolean;
+  isRecurrent: boolean;
   owner: number;
 }
 
@@ -13,4 +14,5 @@ interface ITask {
   category: ICategory['id'];
   name: string;
   owner: number;
+  isDisabled: boolean;
 }

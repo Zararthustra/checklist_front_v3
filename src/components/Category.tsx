@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { App, ConfigProvider, Input, Popover } from 'antd';
+import { App, ConfigProvider, Input, Popover, Switch } from 'antd';
 
 import {
   IconAddTask,
@@ -29,6 +29,7 @@ interface ICategoryProps {
   name: string;
   color: string;
   hidden: boolean;
+  recurrent: boolean;
   tasks: ITask[];
 }
 
@@ -37,6 +38,7 @@ export const Category = ({
   name,
   color,
   hidden,
+  recurrent,
   tasks
 }: ICategoryProps) => {
   const { message } = App.useApp();
@@ -78,6 +80,20 @@ export const Category = ({
           className="rounded-tl-xl px-4 text-zinc-100"
           style={{ background: color }}>
           <div className="flex items-center justify-between py-2">
+            <Switch
+              size="small"
+              checkedChildren={<p className="text-xs">Récurrent</p>}
+              unCheckedChildren={<p className="text-xs">Ponctuel</p>}
+              defaultChecked={recurrent}
+              onChange={(checked: boolean) =>
+                updateCategory({
+                  payload: {
+                    isRecurrent: checked
+                  },
+                  id
+                })
+              }
+            />
             <Popover
               content={
                 <PopOverPalette
@@ -137,9 +153,16 @@ export const Category = ({
         </header>
 
         {!hidden && !!tasks.length && (
-          <div className="my-2 flex flex-col gap-2">
+          <div className="my-2 flex flex-col gap-1">
             {tasks.map((task, index) => (
-              <Task key={index} id={task.id} name={task.name} color={color} />
+              <Task
+                key={index}
+                recurrent={recurrent}
+                disabled={task.isDisabled}
+                id={task.id}
+                name={task.name}
+                color={color}
+              />
             ))}
           </div>
         )}

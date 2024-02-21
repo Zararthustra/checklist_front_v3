@@ -63,6 +63,17 @@ export const updateCategory = async ({
   return data;
 };
 
+export const updateTask = async ({
+  payload,
+  id
+}: {
+  payload: any;
+  id: string;
+}): Promise<ITask> => {
+  const { data } = await axiosInstance.patch(`/tasks/${id}`, payload);
+  return data;
+};
+
 // DELETE
 export const removeTask = async (id: string): Promise<any> => {
   await axiosInstance.delete(`/tasks/${id}`);
@@ -187,6 +198,43 @@ export const useMutationUpdateCategory = () => {
           "Vérifiez votre connexion internet ou contactez l'administrateur"
         )
       );
+    }
+  });
+};
+
+export const useMutationUpdateTask = (disabled: boolean) => {
+  const queryClient = useQueryClient();
+  const { message } = App.useApp();
+
+  return useMutation(updateTask, {
+    onMutate: () => {
+      message.open(
+        messageObject('loading', 'Chargement...', 'useMutationUpdateTask')
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['tasks']);
+      message.success(
+        messageObject(
+          'success',
+          disabled ? 'À faire !' : 'Check !',
+          'useMutationUpdateTask'
+        )
+      );
+    },
+    onError: (error: AxiosError) => {
+      if (error.response && error.response.status === 404)
+        message.error(
+          messageObject(
+            'error',
+            "Cette tâche n'existe plus !",
+            'useMutationUpdateTask'
+          )
+        );
+      else
+        message.error(
+          messageObject('error', error.message, 'useMutationUpdateTask')
+        );
     }
   });
 };

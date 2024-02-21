@@ -146,3 +146,10 @@
 .ant-input-clear-icon {
   @apply dark:text-zinc-500 !important;
 }
+/* Switch */
+.ant-switch:not(.ant-switch-checked) {
+  @apply bg-zinc-400 dark:bg-zinc-900 !important;
+}
+.ant-switch-checked {
+  @apply bg-primary-500 !important;
+}

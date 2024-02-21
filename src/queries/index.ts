@@ -11,6 +11,7 @@ export {
   useMutationDeleteCategory,
   useMutationDeleteTask,
   useMutationUpdateCategory,
+  useMutationUpdateTask,
   useQueryRetrieveCategories,
   useQueryRetrieveTasks
 } from './checklist.query';
