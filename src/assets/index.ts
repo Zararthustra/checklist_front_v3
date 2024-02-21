@@ -19,6 +19,7 @@ export { IconNotification } from './svg/IconNotification';
 export { IconOnOff } from './svg/IconOnOff';
 export { IconPalette } from './svg/IconPalette';
 export { IconParameter } from './svg/IconParameter';
+export { IconReset } from './svg/IconReset';
 export { IconSearch } from './svg/IconSearch';
 export { IconSidebarClose } from './svg/IconSidebarClose';
 export { IconSidebarOpen } from './svg/IconSidebarOpen';

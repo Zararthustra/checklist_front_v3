@@ -1,15 +1,23 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Empty } from 'antd';
 
-import { IconLoader } from '@assets/index';
-import { Category, Login, ModalReconnect, Navbar } from '@components/index';
+import { IconLoader, IconLogin, IconReset } from '@assets/index';
+import {
+  Button,
+  Category,
+  Login,
+  ModalReconnect,
+  Navbar
+} from '@components/index';
 import {
   useQueryRetrieveCategories,
   useQueryRetrieveTasks
 } from '@queries/index';
-import { getLS } from '@services/localStorageService';
+import { clearLS, getLS } from '@services/localStorageService';
 
 export const Home = () => {
+  const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(!!getLS('accessToken'));
   const {
     data: categories,
@@ -22,6 +30,11 @@ export const Home = () => {
     isLoading: loadingTasks
   } = useQueryRetrieveTasks(isAuth);
 
+  const handleLogout = () => {
+    clearLS();
+    navigate(0);
+  };
+
   if (!isAuth) return <Login setIsAuth={setIsAuth} />;
   if (!tasks || !categories)
     return (
@@ -30,9 +43,20 @@ export const Home = () => {
         <main data-testid="home-nodata" className="mt-[100px]">
           <Empty
             description={
-              <p className="dark:text-zinc-100">
-                Une erreur est survenue, veuillez vous reconnecter.
-              </p>
+              <div className="flex flex-col items-center justify-center gap-5">
+                <p className="dark:text-zinc-100">
+                  Impossible de récupérer les données.
+                </p>
+                <div className="flex flex-col gap-1">
+                  <Button primary onClick={handleLogout}>
+                    <IconLogin />
+                    Se reconnecter
+                  </Button>
+                  <Button secondary onClick={() => navigate(0)}>
+                    <IconReset /> Recharger la page
+                  </Button>
+                </div>
+              </div>
             }
           />
         </main>
