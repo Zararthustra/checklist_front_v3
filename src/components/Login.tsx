@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Input } from "antd";
-import { useFormik } from "formik";
-import { object, string } from "yup";
+import { useEffect, useState } from 'react';
+import { Input } from 'antd';
+import { useFormik } from 'formik';
+import { object, string } from 'yup';
 
-import { IconLogo } from "@assets/index";
-import { Button } from "@components/index";
-import { useMutationLogin, useMutationRegister } from "@queries/index";
+import { IconLogo } from '@assets/index';
+import { Button } from '@components/index';
+import { useMutationLogin, useMutationRegister } from '@queries/index';
 
 interface ILoginProps {
   setIsAuth: (value: boolean) => void;
@@ -16,12 +16,12 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
   const {
     mutate: login,
     isLoading: loadingLogin,
-    isSuccess: loginSuccess,
+    isSuccess: loginSuccess
   } = useMutationLogin();
   const {
     mutate: register,
     isLoading: loadingRegister,
-    isSuccess: registerSuccess,
+    isSuccess: registerSuccess
   } = useMutationRegister();
 
   const onSubmitHandler = async (values: {
@@ -35,14 +35,14 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
 
   const { errors, touched, getFieldProps, handleSubmit } = useFormik({
     initialValues: {
-      username: "",
-      password: "",
+      username: '',
+      password: ''
     },
     onSubmit: onSubmitHandler,
     validationSchema: object({
-      username: string().required("Compte requis"),
-      password: string().required("Mot de passe requis"),
-    }),
+      username: string().required('Compte requis'),
+      password: string().required('Mot de passe requis')
+    })
   });
 
   useEffect(() => {
@@ -56,8 +56,7 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
     <>
       <main
         data-testid="login"
-        className="justify-centers flex h-[100dvh] flex-col items-center bg-zinc-100 px-2 dark:text-zinc-100"
-      >
+        className="justify-centers flex h-[100dvh] flex-col items-center bg-zinc-100 px-2 dark:text-zinc-100">
         <IconLogo width={300} height={300} className="mt-10" />
         <form className="max-w-[15rem]" onSubmit={handleSubmit}>
           {/* Compte */}
@@ -69,8 +68,8 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
               allowClear
               id="username"
               autoComplete="username"
-              status={touched.username && errors.username ? "error" : ""}
-              {...getFieldProps("username")}
+              status={touched.username && errors.username ? 'error' : ''}
+              {...getFieldProps('username')}
               data-testid="login-username"
             />
             {touched.username && errors.username && (
@@ -87,8 +86,8 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
               allowClear
               id="password"
               autoComplete="current-password"
-              status={touched.password && errors.password ? "error" : ""}
-              {...getFieldProps("password")}
+              status={touched.password && errors.password ? 'error' : ''}
+              {...getFieldProps('password')}
               data-testid="login-password"
             />
             {touched.password && errors.password && (
@@ -102,20 +101,18 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
             disabled={!!errors.username || !!errors.password}
             loading={loadingLogin || loadingRegister}
             className="my-5 w-full disabled:bg-zinc-200"
-            dataTestid="login-submit"
-          >
-            {createAcc ? "Créer mon compte" : "Se connecter"}
+            dataTestid="login-submit">
+            {createAcc ? 'Créer mon compte' : 'Se connecter'}
           </Button>
 
           <div className="flex flex-wrap justify-center gap-2 text-xs">
             <p className="text-zinc-400">
-              {createAcc ? "Déjà un compte ?" : "Pas encore de compte ?"}
+              {createAcc ? 'Déjà un compte ?' : 'Pas encore de compte ?'}
             </p>
             <p
               onClick={() => setCreateAcc(!createAcc)}
-              className="cursor-pointer font-bold text-zinc-500 underline transition-colors hover:text-primary-500"
-            >
-              {createAcc ? "Se connecter" : "Créer un compte"}
+              className="cursor-pointer font-bold text-zinc-500 underline transition-colors hover:text-primary-500">
+              {createAcc ? 'Se connecter' : 'Créer un compte'}
             </p>
           </div>
         </form>

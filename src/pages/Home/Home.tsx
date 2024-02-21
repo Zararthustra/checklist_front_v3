@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { Empty } from "antd";
+import { useState } from 'react';
+import { Empty } from 'antd';
 
-import { IconLoader } from "@assets/index";
-import { Category, Login, ModalReconnect, Navbar } from "@components/index";
+import { IconLoader } from '@assets/index';
+import { Category, Login, ModalReconnect, Navbar } from '@components/index';
 import {
   useQueryRetrieveCategories,
-  useQueryRetrieveTasks,
-} from "@queries/index";
-import { getLS } from "@services/localStorageService";
+  useQueryRetrieveTasks
+} from '@queries/index';
+import { getLS } from '@services/localStorageService';
 
 export const Home = () => {
-  const [isAuth, setIsAuth] = useState(!!getLS("accessToken"));
+  const [isAuth, setIsAuth] = useState(!!getLS('accessToken'));
   const {
     data: categories,
     error: errorCategories,
-    isLoading: loadingCategories,
+    isLoading: loadingCategories
   } = useQueryRetrieveCategories(isAuth);
   const {
     data: tasks,
     error: errorTasks,
-    isLoading: loadingTasks,
+    isLoading: loadingTasks
   } = useQueryRetrieveTasks(isAuth);
 
   if (!isAuth) return <Login setIsAuth={setIsAuth} />;
@@ -51,8 +51,7 @@ export const Home = () => {
       <Navbar />
       <main
         data-testid="home"
-        className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100"
-      >
+        className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100">
         <div className="my-5 flex w-full flex-wrap justify-center gap-5">
           {(loadingCategories || loadingTasks) && (
             <div className="flex animate-pulse flex-col items-center gap-2">

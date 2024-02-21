@@ -1,4 +1,4 @@
-import { IconLoader } from "@assets/index";
+import { IconLoader } from '@assets/index';
 
 interface IButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   primary?: boolean;
@@ -6,8 +6,8 @@ interface IButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   style?: object;
   className?: string;
   disabled?: boolean;
-  type?: "button" | "submit" | "reset" | undefined;
-  variant?: "ok" | "ko";
+  type?: 'button' | 'submit' | 'reset' | undefined;
+  variant?: 'ok' | 'ko';
   loading?: boolean;
   onClick?: any;
   dataTestid?: string;
@@ -19,12 +19,12 @@ export const Button = ({
   loading,
   style,
   disabled,
-  type = "button",
+  type = 'button',
   variant,
-  className = "",
+  className = '',
   onClick,
   children,
-  dataTestid,
+  dataTestid
 }: IButtonProps) => (
   <button
     data-testid={dataTestid}
@@ -33,14 +33,13 @@ export const Button = ({
     style={style}
     className={`
     flex items-center justify-center gap-2
-      ${primary && "btn-primary"}
-      ${secondary && "btn-secondary"}
-      ${variant === "ok" && "btn-variant-ok"}
-      ${variant === "ko" && "btn-variant-ko"}
+      ${primary && 'btn-primary'}
+      ${secondary && 'btn-secondary'}
+      ${variant === 'ok' && 'btn-variant-ok'}
+      ${variant === 'ko' && 'btn-variant-ko'}
       ${className} 
       `}
-    onClick={onClick}
-  >
+    onClick={onClick}>
     {loading ? <IconLoader /> : children}
   </button>
 );

@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { App, ConfigProvider, Input, Popover } from "antd";
+import { useContext, useEffect, useState } from 'react';
+import { App, ConfigProvider, Input, Popover } from 'antd';
 
 import {
   IconAddTask,
@@ -8,21 +8,21 @@ import {
   IconPalette,
   IconSMS,
   IconTrash,
-  IconVisible,
-} from "@assets/index";
+  IconVisible
+} from '@assets/index';
 import {
   Button,
   ModalConfirmDelete,
   PopOverPalette,
-  Task,
-} from "@components/index";
-import { ITask } from "@interfaces/index";
+  Task
+} from '@components/index';
+import { ITask } from '@interfaces/index';
 import {
   useMutationCreateTask,
-  useMutationUpdateCategory,
-} from "@queries/index";
-import AppContext, { IAppContext } from "@services/AppContext";
-import { capitalizeFirstLetter, messageObject } from "@utils/formatters";
+  useMutationUpdateCategory
+} from '@queries/index';
+import AppContext, { IAppContext } from '@services/AppContext';
+import { capitalizeFirstLetter, messageObject } from '@utils/formatters';
 
 interface ICategoryProps {
   id: string;
@@ -37,11 +37,11 @@ export const Category = ({
   name,
   color,
   hidden,
-  tasks,
+  tasks
 }: ICategoryProps) => {
   const { message } = App.useApp();
   const { darkMode } = useContext<IAppContext>(AppContext);
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>('');
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [openPopover, setOpenPopover] = useState<boolean>(false);
   const { mutate: updateCategory, isLoading: loadingUpdate } =
@@ -51,17 +51,17 @@ export const Category = ({
   const handleAddTask = (e: any) => {
     e.preventDefault();
     if (!inputValue) {
-      message.success(messageObject("warning", "Il n'y a rien à ajouter !"));
+      message.success(messageObject('warning', "Il n'y a rien à ajouter !"));
       return;
     }
     createTask({
       name: inputValue,
-      categoryId: id,
+      categoryId: id
     });
   };
 
   useEffect(() => {
-    if (isSuccess) setInputValue("");
+    if (isSuccess) setInputValue('');
   }, [isSuccess]);
 
   return (
@@ -75,9 +75,8 @@ export const Category = ({
 
       <div data-testid="category" className="h-fit w-[95%] max-w-[25rem]">
         <header
-          className="rounded-tl-xl px-4 text-zinc-100 dark:text-zinc-900"
-          style={{ background: color }}
-        >
+          className="rounded-tl-xl px-4 text-zinc-100"
+          style={{ background: color }}>
           <div className="flex items-center justify-between py-2">
             <Popover
               content={
@@ -89,19 +88,17 @@ export const Category = ({
               title="Choisissez une couleur"
               trigger="click"
               open={openPopover}
-              onOpenChange={() => setOpenPopover(!openPopover)}
-            >
+              onOpenChange={() => setOpenPopover(!openPopover)}>
               <IconPalette className="cursor-pointer" />
             </Popover>
             <a
               href={
-                "sms:?&body=Voici ma liste " +
+                'sms:?&body=Voici ma liste ' +
                 name +
-                " :%0a- " +
-                tasks.map((task) => task.name).join("%0a- ")
+                ' :%0a- ' +
+                tasks.map((task) => task.name).join('%0a- ')
               }
-              className="cursor-pointer hover:text-zinc-100 dark:hover:text-zinc-900"
-            >
+              className="cursor-pointer hover:text-zinc-100 dark:hover:text-zinc-900">
               <IconSMS />
             </a>
             {loadingUpdate ? (
@@ -111,9 +108,9 @@ export const Category = ({
                 onClick={() =>
                   updateCategory({
                     payload: {
-                      isHidden: false,
+                      isHidden: false
                     },
-                    id,
+                    id
                   })
                 }
                 className="cursor-pointer"
@@ -123,9 +120,9 @@ export const Category = ({
                 onClick={() =>
                   updateCategory({
                     payload: {
-                      isHidden: true,
+                      isHidden: true
                     },
-                    id,
+                    id
                   })
                 }
                 className="cursor-pointer"
@@ -148,27 +145,23 @@ export const Category = ({
         )}
 
         <footer className="flex">
-          <form
-            className="flex w-full text-zinc-100 dark:text-zinc-900"
-            onSubmit={handleAddTask}
-          >
+          <form className="flex w-full text-zinc-100" onSubmit={handleAddTask}>
             <ConfigProvider
               theme={{
                 components: {
                   Input: {
-                    colorBgContainer: darkMode ? "#18181b" : "white",
-                    colorText: darkMode ? "white" : "black",
-                  },
-                },
-              }}
-            >
+                    colorBgContainer: darkMode ? '#18181b' : 'white',
+                    colorText: darkMode ? 'white' : 'black'
+                  }
+                }
+              }}>
               <Input
                 allowClear
                 style={{
                   // Linear gradient on border
-                  border: "1px solid " + (color[0] === "#" ? color : ""),
-                  borderImageSlice: color[0] === "l" ? "1" : "",
-                  borderImageSource: color[0] === "l" ? color : "",
+                  border: '1px solid ' + (color[0] === '#' ? color : ''),
+                  borderImageSlice: color[0] === 'l' ? '1' : '',
+                  borderImageSource: color[0] === 'l' ? color : ''
                 }}
                 id="task"
                 onChange={(e) => setInputValue(e.target.value)}
@@ -182,10 +175,9 @@ export const Category = ({
               disabled={isLoading}
               loading={isLoading}
               style={{
-                background: color[0] === "l" ? color.split(",")[1] : color,
+                background: color[0] === 'l' ? color.split(',')[1] : color
               }}
-              className="rounded-br-xl px-3 py-2"
-            >
+              className="rounded-br-xl px-3 py-2">
               <IconAddTask />
             </Button>
           </form>

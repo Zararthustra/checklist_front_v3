@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export interface IAppContext {
   darkMode: boolean;
@@ -7,7 +7,7 @@ export interface IAppContext {
 
 const AppContext = createContext<IAppContext>({
   darkMode: false,
-  setDarkMode: () => null,
+  setDarkMode: () => null
 });
 
 export default AppContext;

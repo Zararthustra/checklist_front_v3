@@ -1,10 +1,10 @@
-import { IIcon } from "@interfaces/index";
+import { IIcon } from '@interfaces/index';
 
 export const IconSidebarClose = ({
   size = 24,
-  className = "",
+  className = '',
   onClick,
-  style,
+  style
 }: IIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -15,8 +15,7 @@ export const IconSidebarClose = ({
     strokeWidth="0.1"
     style={style}
     fill="currentColor"
-    viewBox="0 0 24 24"
-  >
+    viewBox="0 0 24 24">
     <path
       stroke="currentColor"
       d="M11.28 9.53 8.81 12l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3-3a.75.75 0 0 1 0-1.06l3-3a.75.75 0 1 1 1.06 1.06z"

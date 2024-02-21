@@ -1,10 +1,10 @@
-import { IIcon } from "@interfaces/index";
+import { IIcon } from '@interfaces/index';
 
 export const IconOnOff = ({
   width = 24,
   height = 24,
-  className = "",
-  onClick,
+  className = '',
+  onClick
 }: IIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -13,8 +13,7 @@ export const IconOnOff = ({
     height={height}
     width={width}
     onClick={onClick}
-    viewBox="0 0 24 24"
-  >
+    viewBox="0 0 24 24">
     <path
       fill="currentColor"
       fillRule="evenodd"

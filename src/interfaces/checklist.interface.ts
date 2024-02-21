@@ -10,7 +10,7 @@ interface ICategory {
 
 interface ITask {
   id: string;
-  category: ICategory["id"];
+  category: ICategory['id'];
   name: string;
   owner: number;
 }

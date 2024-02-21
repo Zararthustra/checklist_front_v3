@@ -1,12 +1,12 @@
-import { IIcon } from "@interfaces/index";
+import { IIcon } from '@interfaces/index';
 
 export const IconLogo = ({
   width = 24,
   height = 24,
-  className = "",
+  className = '',
   style,
   color,
-  onClick,
+  onClick
 }: IIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -15,9 +15,8 @@ export const IconLogo = ({
     onClick={onClick}
     className={className}
     style={style}
-    fill={color ?? "#f4f4f5"}
-    viewBox="0 0 192 192"
-  >
+    fill={color ?? '#f4f4f5'}
+    viewBox="0 0 192 192">
     <g clipPath="url(#clip0_464_52)">
       <rect width="192" height="192" fill="#f4f4f5" />
       <path
@@ -31,7 +30,7 @@ export const IconLogo = ({
       <path
         d="M117.801 138.359L107.711 127.167L102.666 121.57L100.143 118.772L97.621 115.974L97.588 104.031L99.0943 105.788L101.546 108.586L106.449 114.182L116.256 125.374L167.325 41.4011L174.515 45.0363L117.801 138.359Z"
         fill="url(#paint0_linear_464_52)"
-        style={{ mixBlendMode: "screen" }}
+        style={{ mixBlendMode: 'screen' }}
       />
     </g>
     <defs>
@@ -41,8 +40,7 @@ export const IconLogo = ({
         y1="54.8558"
         x2="99.3734"
         y2="127.315"
-        gradientUnits="userSpaceOnUse"
-      >
+        gradientUnits="userSpaceOnUse">
         <stop stopColor="#82BD69" />
         <stop offset="0.36" stopColor="#82BD69" />
         <stop offset="0.475" stopColor="#f4f4f5" />

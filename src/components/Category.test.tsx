@@ -1,11 +1,11 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render } from '@testing-library/react';
+import { describe, expect, test } from 'vitest';
 
-import { Category } from "@components/index";
-import { categories, tasks } from "@mocks/index";
+import { Category } from '@components/index';
+import { categories, tasks } from '@mocks/index';
 
-describe("Category", () => {
+describe('Category', () => {
   const setup = () => {
     const queryClient = new QueryClient();
     const utils = render(
@@ -20,18 +20,18 @@ describe("Category", () => {
             tasks={tasks.filter((task) => task.category === category.id)}
           />
         ))}
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
-    const categoriesComponents = utils.getAllByTestId("category");
+    const categoriesComponents = utils.getAllByTestId('category');
 
     return {
       categoriesComponents,
-      ...utils,
+      ...utils
     };
   };
 
-  test("Are presents in DOM", () => {
+  test('Are presents in DOM', () => {
     const { categoriesComponents } = setup();
 
     expect(categoriesComponents).toHaveLength(categories.length);

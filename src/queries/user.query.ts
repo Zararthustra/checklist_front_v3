@@ -1,17 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
-import { App } from "antd";
-import { AxiosError } from "axios";
-import { jwtDecode } from "jwt-decode";
+import { useMutation } from '@tanstack/react-query';
+import { App } from 'antd';
+import { AxiosError } from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
-import axiosInstance from "./axios";
+import axiosInstance from './axios';
 
-import { ILoginRequest, ILoginResponse } from "@interfaces/index";
+import { ILoginRequest, ILoginResponse } from '@interfaces/index';
 import {
   setAccessToken,
   setLS,
-  setRefreshToken,
-} from "@services/localStorageService";
-import { messageObject, toastObject } from "@utils/formatters";
+  setRefreshToken
+} from '@services/localStorageService';
+import { messageObject, toastObject } from '@utils/formatters';
 
 // =====
 // Axios
@@ -25,7 +25,7 @@ export const login = async (payload: ILoginRequest) => {
 // RECONNECT
 export const reconnect = async (refreshToken: string) => {
   const { data } = await axiosInstance.post<ILoginResponse>(`/token/refresh/`, {
-    refresh: refreshToken,
+    refresh: refreshToken
   });
   return data;
 };
@@ -49,24 +49,24 @@ export const useMutationLogin = () => {
       setRefreshToken(response.refresh);
       try {
         const token = jwtDecode<any>(response.access);
-        setLS("name", token.username);
-        setLS("userId", token.user_id);
+        setLS('name', token.username);
+        setLS('userId', token.user_id);
 
         notification.success(
           toastObject(
-            "success",
-            "Connexion réussie",
-            `Bonjour ${token.username} !`,
-          ),
+            'success',
+            'Connexion réussie',
+            `Bonjour ${token.username} !`
+          )
         );
       } catch (error) {
-        console.log("JWT Error:", error);
+        console.log('JWT Error:', error);
         notification.error(
           toastObject(
-            "error",
-            "Problème de connexion",
-            `Une erreur est survenue, veuillez vous reconnecter`,
-          ),
+            'error',
+            'Problème de connexion',
+            `Une erreur est survenue, veuillez vous reconnecter`
+          )
         );
       }
     },
@@ -74,20 +74,20 @@ export const useMutationLogin = () => {
       if (error.response?.status === 401)
         notification.error(
           toastObject(
-            "error",
-            "Connexion impossible",
-            "Nom de compte ou mot de passe incorrect.",
-          ),
+            'error',
+            'Connexion impossible',
+            'Nom de compte ou mot de passe incorrect.'
+          )
         );
       else
         notification.error(
           toastObject(
-            "error",
+            'error',
             `Une erreur est survenue`,
-            `Code : ${error.response ? error.response.status : error.message}`,
-          ),
+            `Code : ${error.response ? error.response.status : error.message}`
+          )
         );
-    },
+    }
   });
 };
 
@@ -101,34 +101,34 @@ export const useMutationReconnect = () => {
       setRefreshToken(response.refresh);
       try {
         const token = jwtDecode<any>(response.access);
-        setLS("name", token.username);
-        setLS("userId", token.user_id);
+        setLS('name', token.username);
+        setLS('userId', token.user_id);
         notification.success(
           toastObject(
-            "success",
-            "Reconnexion réussie",
-            `Heureux de vous revoir ${token.username} !`,
-          ),
+            'success',
+            'Reconnexion réussie',
+            `Heureux de vous revoir ${token.username} !`
+          )
         );
       } catch (error) {
-        console.log("JWT Error:", error);
+        console.log('JWT Error:', error);
         notification.error(
           toastObject(
-            "error",
-            "Problème de connexion",
-            `Une erreur est survenue, veuillez vous reconnecter`,
-          ),
+            'error',
+            'Problème de connexion',
+            `Une erreur est survenue, veuillez vous reconnecter`
+          )
         );
       }
     },
     onError: () =>
       notification.error(
         toastObject(
-          "error",
-          "Problème de connexion",
-          `Une erreur est survenue, veuillez vous reconnecter`,
-        ),
-      ),
+          'error',
+          'Problème de connexion',
+          `Une erreur est survenue, veuillez vous reconnecter`
+        )
+      )
   });
 };
 
@@ -140,40 +140,40 @@ export const useMutationRegister = () => {
     onMutate: () => {
       message.open(
         messageObject(
-          "loading",
-          "Création de votre compte...",
-          "useMutationRegister",
-        ),
+          'loading',
+          'Création de votre compte...',
+          'useMutationRegister'
+        )
       );
     },
     onSuccess: () => {
       message.success(
         messageObject(
-          "success",
-          "Compte créé, vous pouvez vous connecter !",
-          "useMutationRegister",
-        ),
+          'success',
+          'Compte créé, vous pouvez vous connecter !',
+          'useMutationRegister'
+        )
       );
     },
     onError: (error: AxiosError) => {
       if (error.response?.status === 400)
         message.error(
           messageObject(
-            "error",
-            "Compte existant, veuillez choisir un autre nom de compte",
-            "useMutationRegister",
-          ),
+            'error',
+            'Compte existant, veuillez choisir un autre nom de compte',
+            'useMutationRegister'
+          )
         );
       else
         message.error(
           messageObject(
-            "error",
+            'error',
             `Une erreur est survenue. Code : ${
               error.response ? error.response.status : error.message
             }`,
-            "useMutationRegister",
-          ),
+            'useMutationRegister'
+          )
         );
-    },
+    }
   });
 };

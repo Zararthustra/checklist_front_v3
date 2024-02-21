@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Modal } from "antd";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Modal } from 'antd';
 
-import { IconInfo, IconLogin, IconOnOff } from "@assets/index";
-import { Button } from "@components/index";
-import { useMutationReconnect } from "@queries/index";
-import { clearLS, getLS } from "@services/localStorageService";
+import { IconInfo, IconLogin, IconOnOff } from '@assets/index';
+import { Button } from '@components/index';
+import { useMutationReconnect } from '@queries/index';
+import { clearLS, getLS } from '@services/localStorageService';
 
 interface IModalReconnectProps {
   showReconnectModal: boolean;
 }
 
 export const ModalReconnect = ({
-  showReconnectModal,
+  showReconnectModal
 }: IModalReconnectProps) => {
   const navigate = useNavigate();
   const { mutate, isLoading, isSuccess } = useMutationReconnect();
@@ -30,11 +30,10 @@ export const ModalReconnect = ({
       footer={
         <div className="flex flex-col items-center gap-1">
           <Button
-            onClick={() => mutate(getLS("refreshToken"))}
+            onClick={() => mutate(getLS('refreshToken'))}
             variant="ok"
             className="w-full"
-            loading={isLoading}
-          >
+            loading={isLoading}>
             <IconLogin width={22} height={22} />
             <p>Se reconnecter</p>
           </Button>
@@ -44,14 +43,12 @@ export const ModalReconnect = ({
             onClick={() => {
               clearLS();
               navigate(0);
-            }}
-          >
+            }}>
             <IconOnOff />
             <p>Se déconnecter</p>
           </Button>
         </div>
-      }
-    >
+      }>
       <div className="">
         <h2 className="text-center">⌛ Session expirée ⌛</h2>
 

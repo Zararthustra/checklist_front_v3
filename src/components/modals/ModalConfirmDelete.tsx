@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { Modal } from "antd";
+import { useEffect } from 'react';
+import { Modal } from 'antd';
 
-import { IconTrash, IconWarning } from "@assets/index";
-import { Button } from "@components/index";
-import { useMutationDeleteCategory } from "@queries/index";
+import { IconTrash, IconWarning } from '@assets/index';
+import { Button } from '@components/index';
+import { useMutationDeleteCategory } from '@queries/index';
 
 interface IModalConfirmDeleteProps {
   showModal: boolean;
@@ -16,12 +16,12 @@ export const ModalConfirmDelete = ({
   showModal,
   setShowModal,
   categoryName,
-  categoryId,
+  categoryId
 }: IModalConfirmDeleteProps) => {
   const {
     mutate: deleteCategory,
     isLoading,
-    isSuccess,
+    isSuccess
   } = useMutationDeleteCategory();
 
   useEffect(() => {
@@ -40,8 +40,7 @@ export const ModalConfirmDelete = ({
           <Button
             onClick={() => deleteCategory(categoryId)}
             variant="ko"
-            loading={isLoading}
-          >
+            loading={isLoading}>
             <IconTrash />
             <p>Supprimer</p>
           </Button>
@@ -49,8 +48,7 @@ export const ModalConfirmDelete = ({
             <p>Annuler</p>
           </Button>
         </div>
-      }
-    >
+      }>
       <h2 className="text-center">Êtes-vous sûr ?</h2>
 
       <div className="bubble bubble--warning my-5">

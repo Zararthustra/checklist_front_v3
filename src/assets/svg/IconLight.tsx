@@ -1,12 +1,12 @@
-import { IIcon } from "@interfaces/index";
+import { IIcon } from '@interfaces/index';
 
 export const IconLight = ({
   width = 24,
   height = 24,
-  className = "",
+  className = '',
   style,
   color,
-  onClick,
+  onClick
 }: IIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -15,11 +15,10 @@ export const IconLight = ({
     onClick={onClick}
     className={className}
     style={style}
-    fill={color ?? "currentColor"}
+    fill={color ?? 'currentColor'}
     viewBox="0 0 24 24"
     stroke="currentColor"
-    strokeWidth="1.5"
-  >
+    strokeWidth="1.5">
     <path
       strokeLinecap="round"
       strokeLinejoin="round"

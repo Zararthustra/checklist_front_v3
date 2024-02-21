@@ -1,26 +1,25 @@
-import { IIcon } from "@interfaces/index";
+import { IIcon } from '@interfaces/index';
 
 export const IconLoader = ({
   width = 24,
   height = 24,
-  className = "",
+  className = '',
   color,
   onClick,
-  style,
+  style
 }: IIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
     onClick={onClick}
-    className={"animate-spin " + className}
+    className={'animate-spin ' + className}
     style={style}
-    viewBox={"0 0 24 24"}
-    fill="none"
-  >
+    viewBox={'0 0 24 24'}
+    fill="none">
     <path
       fill="none"
-      stroke={color ? color : "currentColor"}
+      stroke={color ? color : 'currentColor'}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"

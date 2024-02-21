@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import { IconDark, IconLight } from "@assets/index";
-import AppContext, { IAppContext } from "@services/AppContext";
-import { setLS } from "@services/localStorageService";
+import { IconDark, IconLight } from '@assets/index';
+import AppContext, { IAppContext } from '@services/AppContext';
+import { setLS } from '@services/localStorageService';
 
 export const DarkModeToggle = () => {
   const appContext = useContext<IAppContext>(AppContext);
@@ -10,17 +10,17 @@ export const DarkModeToggle = () => {
 
   // On mounting
   if (appContext?.darkMode) {
-    root.classList.add("dark");
+    root.classList.add('dark');
   }
 
   const toggleDarkMode = () => {
     if (appContext?.darkMode) {
-      root.classList.remove("dark");
-      setLS("darkmode", "false");
+      root.classList.remove('dark');
+      setLS('darkmode', 'false');
       appContext?.setDarkMode(false);
     } else {
-      root.classList.add("dark");
-      setLS("darkmode", "true");
+      root.classList.add('dark');
+      setLS('darkmode', 'true');
       appContext?.setDarkMode(true);
     }
   };

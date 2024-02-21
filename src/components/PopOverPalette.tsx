@@ -1,5 +1,5 @@
-import { flat, gradients } from "@data/colors";
-import { useMutationUpdateCategory } from "@queries/index";
+import { flat, gradients } from '@data/colors';
+import { useMutationUpdateCategory } from '@queries/index';
 
 interface IPopOverPaletteProps {
   categoryId: string;
@@ -7,16 +7,16 @@ interface IPopOverPaletteProps {
 }
 export const PopOverPalette = ({
   setOpenPopover,
-  categoryId,
+  categoryId
 }: IPopOverPaletteProps) => {
   const { mutate: updateCategory } = useMutationUpdateCategory();
 
   const handleChangeColor = (color: string) => {
     updateCategory({
       payload: {
-        color,
+        color
       },
-      id: categoryId,
+      id: categoryId
     });
     setOpenPopover(false);
   };

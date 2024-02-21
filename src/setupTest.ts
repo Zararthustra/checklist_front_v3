@@ -1,12 +1,12 @@
-import "@testing-library/jest-dom";
+import '@testing-library/jest-dom';
 
 // Extend "expect" method with @testing-library/jest-dom methods like "toBeInTheDocument()"
-import * as matchers from "@testing-library/jest-dom/matchers";
-import { cleanup } from "@testing-library/react";
-import { setupServer } from "msw/node";
-import { afterAll, afterEach, beforeAll, expect, vi } from "vitest";
+import * as matchers from '@testing-library/jest-dom/matchers';
+import { cleanup } from '@testing-library/react';
+import { setupServer } from 'msw/node';
+import { afterAll, afterEach, beforeAll, expect, vi } from 'vitest';
 
-import { handlers } from "@mocks/api";
+import { handlers } from '@mocks/api';
 
 expect.extend(matchers);
 
@@ -14,10 +14,10 @@ expect.extend(matchers);
 export const server = setupServer(...handlers);
 beforeAll(() => {
   // Mock jwt-decode library
-  vi.mock("jwt-decode", () => {
+  vi.mock('jwt-decode', () => {
     return {
       default: vi.fn(() => ({ exp: 123 })),
-      jwtDecode: vi.fn(() => ({ exp: 123 })),
+      jwtDecode: vi.fn(() => ({ exp: 123 }))
     };
   });
 
@@ -26,11 +26,11 @@ beforeAll(() => {
   window.getComputedStyle = (elt) => getComputedStyle(elt);
 
   // Mock useQueries (no needed but may be useful someday)
-  vi.mock("@queries/index", async () => {
-    const actual: object = await vi.importActual("@queries/index");
+  vi.mock('@queries/index', async () => {
+    const actual: object = await vi.importActual('@queries/index');
 
     return {
-      ...actual,
+      ...actual
       // useMutationLogin: () => ({
       //   mutate: vi.fn(() => null),
       //   isSuccess: true,
@@ -76,12 +76,12 @@ beforeAll(() => {
       length: 0,
       key(): string | null {
         return null;
-      },
+      }
     };
   })();
   global.localStorage = localStorageMock;
 
-  server.listen({ onUnhandledRequest: "error" });
+  server.listen({ onUnhandledRequest: 'error' });
 });
 //  Close server after all tests
 afterAll(() => server.close());
