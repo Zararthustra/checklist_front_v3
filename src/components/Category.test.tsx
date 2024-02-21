@@ -16,6 +16,7 @@ describe('Category', () => {
             id={category.id}
             color={category.color}
             hidden={category.isHidden}
+            recurrent={category.isRecurrent}
             name={category.name}
             tasks={tasks.filter((task) => task.category === category.id)}
           />

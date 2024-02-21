@@ -71,6 +71,7 @@ describe('Home', () => {
         name: 'my category 3',
         color: '#000',
         isHidden: false,
+        isRecurrent: false,
         owner: 4
       });
     fireEvent.submit(categoryInput);
@@ -91,6 +92,7 @@ describe('Home', () => {
       tasks.push({
         id: '0d92b2a1-1d5d-4280-a914-ee0448da381e',
         name: 'my task 2',
+        isDisabled: false,
         owner: 4,
         category: '411ac8bb-e1e2-4616-8f91-24b03c90f634'
       });

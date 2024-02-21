@@ -6,6 +6,7 @@ export const categories: ICategory[] = [
     name: 'my category 1',
     color: '#0f0',
     isHidden: false,
+    isRecurrent: false,
     owner: 4
   },
   {
@@ -13,6 +14,7 @@ export const categories: ICategory[] = [
     name: 'my category 2',
     color: '#0ff',
     isHidden: true,
+    isRecurrent: false,
     owner: 4
   }
 ];
@@ -22,6 +24,7 @@ export const tasks: ITask[] = [
     id: '0d92b2a1-1d5d-4280-a914-ee0448da381d',
     name: 'my task 1',
     owner: 4,
+    isDisabled: false,
     category: '411ac8bb-e1e2-4616-8f91-24b03c90f634'
   }
 ];
