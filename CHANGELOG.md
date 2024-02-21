@@ -1,8 +1,20 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See
-[standard-version](https://github.com/conventional-changelog/standard-version)
-for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.3.0](https://github.com/Zararthustra/checklist_front_v3/compare/v3.2.0...v3.3.0) (2024-02-21)
+
+
+### Features
+
+* **Category, Task:** add recurrent feature ([3735c8b](https://github.com/Zararthustra/checklist_front_v3/commit/3735c8b6fc3609898014b946dd1a7fe8d6032e93))
+* **Navbar:** add submit button, lint, change darkmode category text color ([8d6cbb2](https://github.com/Zararthustra/checklist_front_v3/commit/8d6cbb2bb14c46c7b40cef5334df528a7cfe0e02))
+
+
+### Bug Fixes
+
+* add "check" to checked tasks in sms body ([ddb801c](https://github.com/Zararthustra/checklist_front_v3/commit/ddb801cd384aec6d975d9e3f884cd8aa9e93db08))
+* add new fields in tests & mocks ([1f33a7e](https://github.com/Zararthustra/checklist_front_v3/commit/1f33a7e89d5a5b54a2171965fe64d1e7d6fecd4c))
 
 ## [3.2.0](https://github.com/Zararthustra/checklist_front_v3/compare/v3.1.0...v3.2.0) (2024-02-13)
 
