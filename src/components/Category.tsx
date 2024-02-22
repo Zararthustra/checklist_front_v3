@@ -111,12 +111,12 @@ export const Category = ({
               href={
                 'sms:?&body=Voici ma liste ' +
                 name +
-                ' :%0a- ' +
+                ' :%0a ' +
                 tasks
                   .map((task) =>
-                    task.isDisabled ? task.name + ' (check)' : task.name
+                    task.isDisabled ? '✅ ' + task.name : '☑️ ' + task.name
                   )
-                  .join('%0a- ')
+                  .join('%0a ')
               }
               className="cursor-pointer hover:text-zinc-100 dark:hover:text-zinc-900">
               <IconSMS />
