@@ -36,6 +36,24 @@ export const Home = () => {
   };
 
   if (!isAuth) return <Login setIsAuth={setIsAuth} />;
+
+  if (loadingCategories || loadingTasks)
+    return (
+      <>
+        <Navbar />
+        <main
+          data-testid="home"
+          className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100">
+          <div className="my-5 flex w-full flex-wrap justify-center gap-5">
+            <div className="flex animate-pulse flex-col items-center gap-2">
+              <IconLoader width={100} height={100} />
+              <i>Chargement de la checklist...</i>
+            </div>
+          </div>
+        </main>
+      </>
+    );
+
   if (!tasks || !categories)
     return (
       <>
@@ -62,6 +80,7 @@ export const Home = () => {
         </main>
       </>
     );
+
   return (
     <>
       {(errorTasks || errorCategories) && (
@@ -77,12 +96,6 @@ export const Home = () => {
         data-testid="home"
         className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100">
         <div className="my-5 flex w-full flex-wrap justify-center gap-5">
-          {(loadingCategories || loadingTasks) && (
-            <div className="flex animate-pulse flex-col items-center gap-2">
-              <IconLoader width={100} height={100} />
-              <i>Chargement de la checklist...</i>
-            </div>
-          )}
           {categories &&
             tasks &&
             categories.map((category, index) => (
