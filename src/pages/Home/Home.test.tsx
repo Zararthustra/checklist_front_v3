@@ -41,8 +41,8 @@ describe('Home', () => {
   test('Second render: token OK => Home', async () => {
     const { queryByTestId, queryAllByTestId, findByTestId } = setup();
 
-    // On mount : Data KO
-    const mainEmpty = queryByTestId('home-nodata');
+    // On mount : Data loading
+    const mainEmpty = queryByTestId('home-loading');
     const categoriesComponentsOnMount = queryAllByTestId('category');
     expect(mainEmpty).toBeInTheDocument();
     expect(categoriesComponentsOnMount).toHaveLength(0);

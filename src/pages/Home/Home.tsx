@@ -42,7 +42,7 @@ export const Home = () => {
       <>
         <Navbar />
         <main
-          data-testid="home"
+          data-testid="home-loading"
           className="mt-[50px] flex flex-col items-center px-2 dark:text-zinc-100">
           <div className="my-5 flex w-full flex-wrap justify-center gap-5">
             <div className="flex animate-pulse flex-col items-center gap-2">
