@@ -21,5 +21,6 @@ export {
   register,
   useMutationLogin,
   useMutationReconnect,
-  useMutationRegister
+  useMutationRegister,
+  useMutationDeleteUser
 } from './user.query';

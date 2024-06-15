@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Empty } from 'antd';
 
-import { IconLoader, IconLogin, IconReset } from '@assets/index';
+import { IconLoader, IconLogin, IconReset, IconTrash } from '@assets/index';
 import {
   Button,
   Category,
@@ -11,6 +11,7 @@ import {
   Navbar
 } from '@components/index';
 import {
+  useMutationDeleteUser,
   useQueryRetrieveCategories,
   useQueryRetrieveTasks
 } from '@queries/index';
@@ -29,11 +30,23 @@ export const Home = () => {
     error: errorTasks,
     isLoading: loadingTasks
   } = useQueryRetrieveTasks(isAuth);
+  const {
+    mutate: deleteUser,
+    isSuccess: successDelete,
+    isLoading: loadingDelete
+  } = useMutationDeleteUser();
 
   const handleLogout = () => {
     clearLS();
     navigate(0);
   };
+
+  useEffect(() => {
+    if (successDelete) {
+      clearLS();
+      navigate(0);
+    }
+  }, [successDelete]);
 
   if (!isAuth) return <Login setIsAuth={setIsAuth} />;
 
@@ -110,6 +123,13 @@ export const Home = () => {
               />
             ))}
         </div>
+        <Button
+          variant="ko"
+          className="mt-40"
+          loading={loadingDelete}
+          onClick={() => deleteUser(getLS('userId'))}>
+          <IconTrash /> Supprimer mon compte
+        </Button>
       </main>
     </>
   );

@@ -34,6 +34,10 @@ export const register = async (payload: ILoginRequest) => {
   const { data } = await axiosInstance.post(`/register`, payload);
   return data;
 };
+// DELETE
+const deleteUser = async (userId: string): Promise<any> => {
+  await axiosInstance.delete(`/users/${userId}`);
+};
 
 // ==========
 // ReactQuery
@@ -174,6 +178,29 @@ export const useMutationRegister = () => {
             'useMutationRegister'
           )
         );
+    }
+  });
+};
+
+// DELETE
+export const useMutationDeleteUser = () => {
+  const { message } = App.useApp();
+
+  return useMutation(deleteUser, {
+    onMutate: () => {
+      message.open(
+        messageObject('loading', 'Suppression...', 'useMutationDeleteUser')
+      );
+    },
+    onSuccess: () => {
+      message.success(
+        messageObject('success', 'Compte supprimé', 'useMutationDeleteUser')
+      );
+    },
+    onError: (error: AxiosError) => {
+      message.error(
+        messageObject('error', error.message, 'useMutationDeleteUser')
+      );
     }
   });
 };
