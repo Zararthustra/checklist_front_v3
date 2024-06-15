@@ -3,7 +3,7 @@ import { App as AntApp, ConfigProvider } from 'antd';
 import frFR from 'antd/locale/fr_FR';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
-import { Home, NotFound } from '@pages/index';
+import { Home, NotFound, PrivacyRules } from '@pages/index';
 import AppWrapper from '@services/AppWrapper';
 
 const App = () => {
@@ -38,6 +38,8 @@ const App = () => {
             <Route element={<AppWrapper />}>
               <Route element={<Home />} path="/" />
             </Route>
+            {/* Règles de confidentialités */}
+            <Route element={<PrivacyRules />} path="/privacyrules" />
             {/* 404 */}
             <Route path="/*" element={<NotFound />} />
           </Routes>

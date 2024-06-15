@@ -6,6 +6,7 @@ import { object, string } from 'yup';
 import { IconLogo } from '@assets/index';
 import { Button } from '@components/index';
 import { useMutationLogin, useMutationRegister } from '@queries/index';
+import { Link } from 'react-router-dom';
 
 interface ILoginProps {
   setIsAuth: (value: boolean) => void;
@@ -116,9 +117,10 @@ export const Login = ({ setIsAuth }: ILoginProps) => {
             </p>
           </div>
         </form>
-        <p className="mt-auto self-end p-5 text-zinc-300">
-          Version {APP_VERSION}
-        </p>
+        <div className="mt-auto p-5 text-zinc-400">
+          <Link to="/privacyrules">Règles de confidentialités</Link>
+          <p className="text-center text-zinc-300">Version {APP_VERSION}</p>
+        </div>
       </main>
     </>
   );
