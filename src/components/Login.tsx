@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Input } from 'antd';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
@@ -6,7 +7,6 @@ import { object, string } from 'yup';
 import { IconLogo } from '@assets/index';
 import { Button } from '@components/index';
 import { useMutationLogin, useMutationRegister } from '@queries/index';
-import { Link } from 'react-router-dom';
 
 interface ILoginProps {
   setIsAuth: (value: boolean) => void;

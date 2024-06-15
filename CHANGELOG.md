@@ -1,20 +1,22 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[standard-version](https://github.com/conventional-changelog/standard-version)
+for commit guidelines.
 
 ### [3.3.2](https://github.com/Zararthustra/checklist_front_v3/compare/v3.3.1...v3.3.2) (2024-02-22)
 
-
 ### Bug Fixes
 
-* check emoji in sms body ([8cc8067](https://github.com/Zararthustra/checklist_front_v3/commit/8cc8067279c8083a22f54ae8769af45e871f7557))
+- check emoji in sms body
+  ([8cc8067](https://github.com/Zararthustra/checklist_front_v3/commit/8cc8067279c8083a22f54ae8769af45e871f7557))
 
 ### [3.3.1](https://github.com/Zararthustra/checklist_front_v3/compare/v3.3.0...v3.3.1) (2024-02-21)
 
-
 ### Bug Fixes
 
-* add CTA on hydration error ([4db3424](https://github.com/Zararthustra/checklist_front_v3/commit/4db34248086f16b16c18c0c041d1fa6e02306d4c))
+- add CTA on hydration error
+  ([4db3424](https://github.com/Zararthustra/checklist_front_v3/commit/4db34248086f16b16c18c0c041d1fa6e02306d4c))
 
 ## [3.3.0](https://github.com/Zararthustra/checklist_front_v3/compare/v3.2.0...v3.3.0) (2024-02-21)
 
