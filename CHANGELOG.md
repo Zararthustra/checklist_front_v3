@@ -1,8 +1,21 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See
-[standard-version](https://github.com/conventional-changelog/standard-version)
-for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.4.0](https://github.com/Zararthustra/checklist_front_v3/compare/v3.3.2...v3.4.0) (2024-06-15)
+
+
+### Features
+
+* **PrivacyRules:** add PrivacyRules ([a76d68b](https://github.com/Zararthustra/checklist_front_v3/commit/a76d68bee983552a750bc47e116bd3ec94d21c62))
+* **User:** add delete acc ([49055dd](https://github.com/Zararthustra/checklist_front_v3/commit/49055dd398e4ad3c3ca4d8ce0e43d319dbcc66d6))
+
+
+### Bug Fixes
+
+* loading state ([af735ba](https://github.com/Zararthustra/checklist_front_v3/commit/af735ba470f5e48ec2e245ac431658c0766d4141))
+* test & lint ([22186b4](https://github.com/Zararthustra/checklist_front_v3/commit/22186b487ede3c3730721e2f8f7a8c96aae00691))
+* tests ([eff0eee](https://github.com/Zararthustra/checklist_front_v3/commit/eff0eee37f379ea8d0a72ff97b8a27957ff2a36a))
 
 ### [3.3.2](https://github.com/Zararthustra/checklist_front_v3/compare/v3.3.1...v3.3.2) (2024-02-22)
 
